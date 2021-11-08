@@ -20,6 +20,8 @@ class Skinnable
 
   def save_textures_with_brand(br)
 
+    return if self.skinnable_entry['textures'].nil?
+
     self.skinnable_entry['textures'].keys.each do |tn|
       tw = TextureWrapper.new(self.skinnable_dir, tn)
       txtr = tw.texture_with_brand(br)
