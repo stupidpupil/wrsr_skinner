@@ -6,6 +6,12 @@ class Brand
 
   attr_reader :colors, :logo_name
 
+  #
+  # Colors list
+  # 0 - Base
+  # 1 - Logo
+  # 2 - Horizontal small stripe
+
   def initialize(colors=['transparent', 'black'], logo_name=nil)
     @colors = colors
     @logo_name = logo_name

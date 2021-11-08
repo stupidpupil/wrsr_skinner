@@ -5,7 +5,7 @@ class TextureWrapper
 
   include Magick
 
-  attr_reader :texture_path, :texture_entry
+  attr_reader :skinnable_dir, :texture_path, :texture_entry
 
   def initialize(skinnable_dir, texture_name)
     @skinnable_dir = skinnable_dir
@@ -22,7 +22,8 @@ class TextureWrapper
       geometry: k, 
       brightness: (v&.[]('brightness') || 1.0),
       saturation: (v&.[]('saturation') || 1.0),
-      hue: (v&.[]('hue') || 1.0)
+      hue: (v&.[]('hue') || 1.0),
+      mask: v&.[]('mask')
     }}
 
   end
@@ -37,7 +38,11 @@ class TextureWrapper
       return self.texture_entry['color_regions'].map {|cr| {geometry: cr, color:0}}
     end
 
-    self.texture_entry['color_regions'].map {|k,v| {geometry: k, color:(v&.[]('color') || v&.[]('colour') || 0)}}
+    self.texture_entry['color_regions'].map {|k,v| {
+      geometry: k, 
+      color:(v&.[]('color') || v&.[]('colour') || 0),
+      mask: v&.[]('mask')
+    }}
 
   end
 
@@ -54,7 +59,8 @@ class TextureWrapper
       geometry: k, 
       rotate: (v&.[]('rotate') || 0),
       worn: (v&.[]('worn') || false),
-      barrier: (v&.[]('barrier').nil? ? true : v&.[]('barrier'))
+      barrier: (v&.[]('barrier').nil? ? true : v&.[]('barrier')),
+      mask: v&.[]('mask')
     }}
 
   end
@@ -74,6 +80,12 @@ class TextureWrapper
       mod_mask = Image.new(texture.columns, texture.rows) { 
         self.depth=16; self.colorspace = RGBColorspace; self.background_color='transparent'}
 
+      if drs[:mask]
+        supplied_mask = Image.read(self.skinnable_dir + "/" + drs[:mask]).first
+        supplied_mask.alpha(ActivateAlphaChannel)
+        mod_texture.composite!(supplied_mask, CenterGravity, DstOutCompositeOp)
+      end
+
       drs_points = drs[:geometry].split(",").map {|e| eval(e).to_i}
 
       region = Magick::Draw.new
@@ -87,7 +99,7 @@ class TextureWrapper
       region.fill = 'white'
       region.draw(mod_mask)
 
-      mod_texture = mod_texture.composite(mod_mask, CenterGravity, DstInCompositeOp)
+      mod_texture.composite!(mod_mask, CenterGravity, DstInCompositeOp)
 
       texture = texture.composite(mod_texture, CenterGravity, OverCompositeOp)
     end
@@ -129,6 +141,12 @@ class TextureWrapper
         end
 
         region.draw(color_overlay)
+
+        if crs[:mask]
+          supplied_mask = Image.read(self.skinnable_dir + "/" + crs[:mask]).first
+          supplied_mask.alpha(ActivateAlphaChannel)
+          color_overlay.composite!(supplied_mask, CenterGravity, DstOutCompositeOp)
+        end
         
       end
 

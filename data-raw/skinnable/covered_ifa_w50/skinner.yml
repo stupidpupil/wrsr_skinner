@@ -4,6 +4,13 @@ textures:
       0,1817, 618,1786, 937,1816, 1234,1883, 1318,1973, 1441,1973, 1441,2048, 0,2048:
         saturation: 0
         brightness: 1.05
+        mask: base_mask.png
+
+    color_regions:
+      0,1920 ,949,1920+64:
+        mask: base_mask.png
+        comment: cab stripe
+
 
   covered.dds:
     color_regions:
