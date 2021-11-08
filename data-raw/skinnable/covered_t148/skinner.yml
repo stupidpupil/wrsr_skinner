@@ -10,3 +10,4 @@ textures:
       336,330, 730,649:
         mask: base_bonnet_mask.png
         comment: bonnet (like cab stripe)
+        color: 99
