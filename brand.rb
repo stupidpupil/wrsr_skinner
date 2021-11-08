@@ -16,6 +16,8 @@ class Brand
   end
 
   def logo_image
+    return nil if self.logo_name.nil?
+
     logo_color = self.colors[1]
 
     ret = Image.read(self.logo_path).first

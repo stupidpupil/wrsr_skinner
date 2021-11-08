@@ -37,7 +37,7 @@ class TextureWrapper
       return self.texture_entry['color_regions'].map {|cr| {geometry: cr, color:0}}
     end
 
-    self.texture_entry['color_regions'].map {|k,v| {geometry: cr, color:(v&.[]('color') || v&.[]('colour') || 0)}}
+    self.texture_entry['color_regions'].map {|k,v| {geometry: k, color:(v&.[]('color') || v&.[]('colour') || 0)}}
 
   end
 
@@ -97,10 +97,10 @@ class TextureWrapper
 
     self.color_regions.group_by {|cr| cr[:color]}.each do |color_i, crs_for_color|
 
-      color = brand.colors[color_i]
+      region_color = brand.colors[color_i]
 
-      if color.nil?
-        color = 'transparent'
+      if region_color.nil?
+        region_color = 'transparent'
       end
 
       crs_for_color.each do |crs|
@@ -108,7 +108,7 @@ class TextureWrapper
 
         region = Magick::Draw.new
         
-        region.fill = brand.colors[color_i]
+        region.fill = region_color
 
         if(crs_points.count == 4)
           region.rectangle(*crs_points)
@@ -123,24 +123,26 @@ class TextureWrapper
 
     brand_logo_image = brand.logo_image
 
-    self.logo_regions.each do |lr|
-      # Resize logo
+    if not brand_logo_image.nil?
+      self.logo_regions.each do |lr|
+        # Resize logo
 
-      region_points = lr[:geometry].split(",").map {|e| eval(e).to_i}
+        region_points = lr[:geometry].split(",").map {|e| eval(e).to_i}
 
-      lr_width = region_points[2] - region_points[0]
-      lr_height = region_points[3] - region_points[1]
+        lr_width = region_points[2] - region_points[0]
+        lr_height = region_points[3] - region_points[1]
 
-      lg = brand_logo_image.rotate(lr[:rotate]).resize_to_fit(lr_width, lr_height)
+        lg = brand_logo_image.rotate(lr[:rotate]).resize_to_fit(lr_width, lr_height)
 
-      # Rotate logo
+        # Rotate logo
 
-      # Find centre of logo region
+        # Find centre of logo region
 
-      lr_centre_x = region_points[0] + (lr_width/2).to_i - (overlay.columns/2).to_i
-      lr_centre_y = region_points[1] + (lr_height/2).to_i - (overlay.rows/2).to_i
+        lr_centre_x = region_points[0] + (lr_width/2).to_i - (overlay.columns/2).to_i
+        lr_centre_y = region_points[1] + (lr_height/2).to_i - (overlay.rows/2).to_i
 
-      overlay.composite!(lg, CenterGravity, lr_centre_x, lr_centre_y, OverCompositeOp)
+        overlay.composite!(lg, CenterGravity, lr_centre_x, lr_centre_y, OverCompositeOp)
+      end
     end
 
     texture.composite!(overlay, CenterGravity, OverlayCompositeOp)
