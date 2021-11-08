@@ -1,0 +1,21 @@
+textures:
+  back.dds:
+    modulate_regions:
+      0,0, 1024,1024:
+        saturation: 0.5
+        brightness: 1.0
+
+      0,0, 583,617:
+        saturation: 0
+
+      584,0, 584+375, 412:
+        saturation: 0
+
+    color_regions:
+      - 0,0, 583,617
+      - 584,0, 584+375, 412
+
+    logo_regions:
+      88,471, 88+444,471+90:
+      88,57, 88+444,57+90:
+        rotate: -180
