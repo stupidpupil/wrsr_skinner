@@ -1,0 +1,30 @@
+textures:
+  refrig.dds:
+    modulate_regions:
+      0,0, 780,270:
+        saturation: 0
+
+      0,319, 897,1024:
+        saturation: 0
+
+    color_regions:
+      0,0, 780,270:
+      0,319, 897,1024:
+
+      0,425, 897,455:
+        color: 2
+        comment: side stripe
+
+      0,896, 897,896+29:
+        color: 2
+        comment: side stripe
+
+      0,135, 246,135+29:
+        color: 2
+        comment: rear stripe
+
+    logo_regions:
+      196,390, 683,510:
+        rotate: 180
+
+      196,842, 683,962:
