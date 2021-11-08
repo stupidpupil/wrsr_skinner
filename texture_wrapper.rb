@@ -156,13 +156,19 @@ class TextureWrapper
         lr_centre_y = region_points[1] + (lr_height/2).to_i
 
         if lr[:barrier] then
+          barrier_overlay = Image.new(overlay.columns, overlay.rows) { 
+            self.depth=16; self.colorspace = RGBColorspace; self.background_color='transparent'}
+          barrier_overlay.alpha(ActivateAlphaChannel)
+
           region = Magick::Draw.new
           
           region.fill = brand.colors[0]
 
           region.circle(lr_centre_x,lr_centre_y, lr_centre_x+lg.columns/2, lr_centre_y+lg.rows/2)
 
-          region.draw(overlay)
+          region.draw(barrier_overlay)
+
+          overlay.composite!(barrier_overlay, CenterGravity, AtopCompositeOp)
         end
 
         # Adjust for CenterGravity
