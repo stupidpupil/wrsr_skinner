@@ -1,0 +1,23 @@
+textures:
+  cistern.dds:
+    color_regions:
+      0,300, 411,300+212:
+
+      74,323, 74+12,323+189:
+        color: 2
+        comment: tank side
+
+      219-12,323, 219,323+189:
+        color: 2
+        comment: tank side
+
+      294,358, 294+100,358+12:
+        color: 2
+        comment: tank rear
+
+    logo_regions:
+      181,391, 181+53, 394+58:
+        rotate: -90
+
+      60,391, 60+53, 394+58:
+        rotate: 90
