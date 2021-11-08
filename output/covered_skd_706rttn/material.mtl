@@ -3,7 +3,7 @@
 $SUBMATERIAL Skoda_706_RTTN__Chassis_1
 
 
-$TEXTURE 0 vehicles/open_skd_706rt/chasis.dds
+$TEXTURE_MTL 0 ../open_skd_706rt/chasis.dds
 $TEXTURE 1 blankspecular.dds
 $TEXTURE 2 blankbump.dds
 
