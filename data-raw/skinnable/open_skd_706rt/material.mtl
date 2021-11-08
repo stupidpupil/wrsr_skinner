@@ -1,0 +1,29 @@
+
+
+$SUBMATERIAL Skoda_706_RTTN__Chassis_1
+
+
+$TEXTURE 0 vehicles/open_skd_706rt/chasis.dds
+$TEXTURE 1 blankspecular.dds
+$TEXTURE 2 blankbump.dds
+
+$DIFFUSECOLOR 0.7 0.7  0.7  1 
+$SPECULARCOLOR 1 1 1 1 
+$AMBIENTCOLOR 0.8  0.8  0.8  1 
+$SPECULARPOWER 2
+
+$SUBMATERIAL Skoda_706_RTC_Opened1
+
+
+$TEXTURE 0 vehicles/open_skd_706rt/open.dds
+$TEXTURE 1 blankspecular.dds
+$TEXTURE 2 blankbump.dds
+
+$DIFFUSECOLOR 0.7 0.7  0.7  1 
+$SPECULARCOLOR 1 1 1 1 
+$AMBIENTCOLOR 0.8  0.8  0.8  1 
+$SPECULARPOWER 2
+
+$END
+
+

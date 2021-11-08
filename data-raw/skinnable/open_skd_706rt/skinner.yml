@@ -1,0 +1,27 @@
+textures:
+  chasis.dds:
+
+  open.dds:
+    modulate_regions:
+      0,0, 734,178:
+        saturation: 0.0
+
+      0,179, 706,264:
+        saturation: 0.0
+
+      0,264, 653,339:
+        saturation: 0.0
+
+      339,264, 706,264, 654,339:
+        saturation: 0.0
+
+      0,419, 848,1024:
+        saturation: 0.0
+
+      0,340, 814,418:
+        saturation: 0.0
+
+    logo_regions:
+      90,727, 90+225,727+239:
+        rotate: -90
+        worn: true
