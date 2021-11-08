@@ -60,6 +60,8 @@ class TextureWrapper
   end
 
   def texture_with_brand(brand)
+    brand_logo_image = brand.logo_image
+
     texture = Image.read(self.texture_path).first
     texture.colorspace = RGBColorspace
 
@@ -104,6 +106,11 @@ class TextureWrapper
 
       region_color = brand.colors[color_i]
 
+      color_overlay = Image.new(overlay.columns, overlay.rows) { 
+        self.depth=16; self.colorspace = RGBColorspace; self.background_color='transparent'}
+
+      color_overlay.alpha(ActivateAlphaChannel)
+
       if region_color.nil?
         region_color = 'transparent'
       end
@@ -121,12 +128,47 @@ class TextureWrapper
           region.polygon(*crs_points)
         end
 
-        region.draw(overlay)
+        region.draw(color_overlay)
         
       end
-    end
 
-    brand_logo_image = brand.logo_image
+      # For anything other than the base colour, we punch out logo barriers
+      if color_i > 0 and not brand_logo_image.nil? then
+
+        barrier_overlay = Image.new(overlay.columns, overlay.rows) { 
+          self.depth=16; self.colorspace = RGBColorspace; self.background_color='transparent'}
+
+        barrier_overlay.alpha(ActivateAlphaChannel)
+
+        self.logo_regions.each do |lr|
+          next if not lr[:barrier]
+          
+          region_points = lr[:geometry].split(",").map {|e| eval(e).to_i}
+
+          lr_width = region_points[2] - region_points[0]
+          lr_height = region_points[3] - region_points[1]
+
+          lr_centre_x = region_points[0] + (lr_width/2).to_i
+          lr_centre_y = region_points[1] + (lr_height/2).to_i
+
+          lg = brand_logo_image.rotate(lr[:rotate]).resize_to_fit(lr_width, lr_height)
+
+          region = Magick::Draw.new
+          
+          region.fill = brand.colors[0]
+
+          region.circle(lr_centre_x,lr_centre_y, lr_centre_x+lg.columns/2, lr_centre_y+lg.rows/2)
+
+          region.draw(barrier_overlay)
+
+        end
+
+        color_overlay.composite!(barrier_overlay, CenterGravity, DstOutCompositeOp)
+
+      end
+
+      overlay.composite!(color_overlay, CenterGravity, OverCompositeOp)
+    end
 
     if not brand_logo_image.nil?
       self.logo_regions.each do |lr|
@@ -154,22 +196,6 @@ class TextureWrapper
 
         lr_centre_x = region_points[0] + (lr_width/2).to_i
         lr_centre_y = region_points[1] + (lr_height/2).to_i
-
-        if lr[:barrier] then
-          barrier_overlay = Image.new(overlay.columns, overlay.rows) { 
-            self.depth=16; self.colorspace = RGBColorspace; self.background_color='transparent'}
-          barrier_overlay.alpha(ActivateAlphaChannel)
-
-          region = Magick::Draw.new
-          
-          region.fill = brand.colors[0]
-
-          region.circle(lr_centre_x,lr_centre_y, lr_centre_x+lg.columns/2, lr_centre_y+lg.rows/2)
-
-          region.draw(barrier_overlay)
-
-          overlay.composite!(barrier_overlay, CenterGravity, AtopCompositeOp)
-        end
 
         # Adjust for CenterGravity
         lr_centre_x = lr_centre_x - (overlay.columns/2).to_i

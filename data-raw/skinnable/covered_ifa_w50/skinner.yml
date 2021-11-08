@@ -23,4 +23,3 @@ textures:
       545,356, 675,447:
         rotate: 90
         worn: true
-        barrier: false
