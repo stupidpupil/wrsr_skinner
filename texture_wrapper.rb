@@ -109,6 +109,7 @@ class TextureWrapper
 
     overlay = Image.new(texture.columns, texture.rows) { 
       self.depth=16; self.colorspace = RGBColorspace; self.background_color='transparent'}
+    overlay.alpha(ActivateAlphaChannel)
 
     #base = Image.new(texture.columns, texture.rows) { 
     #  self.depth=16; self.colorspace = RGBColorspace;  self.background_color='transparent'}
@@ -225,6 +226,7 @@ class TextureWrapper
       end
     end
 
+    overlay.composite!(texture, CenterGravity, DstInCompositeOp)
     texture.composite!(overlay, CenterGravity, OverlayCompositeOp)
 
     texture.quantize(256, YUVColorspace, FloydSteinbergDitherMethod)
