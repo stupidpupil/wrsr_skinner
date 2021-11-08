@@ -3,7 +3,7 @@
 $SUBMATERIAL MaterialFBXASC032FBXASC03532
 
 
-$TEXTURE 0 vehicles/covered_t138/base.dds
+$TEXTURE_MTL 0 base.dds
 $TEXTURE 1 blankspecular.dds
 $TEXTURE 2 blankbump.dds
 

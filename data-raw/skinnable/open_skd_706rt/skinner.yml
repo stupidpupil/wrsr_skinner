@@ -4,15 +4,18 @@ textures:
       0,414, 439,414+120:
         mask: chasis_mask.png
         comment: cab stripe
+        color: 99
 
       15,686, 15+327,686+120:
         mask: chasis_mask.png
         comment: cab stripe
+        color: 99
+
 
       701,695, 1024,695+120:
         mask: chasis_mask.png
         comment: cab stripe
-
+        color: 99
 
   open.dds:
     modulate_regions:

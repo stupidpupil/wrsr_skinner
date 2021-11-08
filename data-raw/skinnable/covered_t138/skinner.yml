@@ -1,9 +1,21 @@
 textures:
+  base.dds:
+    modulate_regions:
+      0,0, 780,1024:
+        saturation: 0.5
+        brightness: 1.1
+        mask: base_mask.png
+
+    color_regions:
+      0,424, 369,670:
+        mask: base_bonnet_mask.png
+        comment: bonnet (like cab stripe)
+        color: 99
+
   back.dds:
     modulate_regions:
       0,0, 1024,1024:
         saturation: 0.5
-        brightness: 1.0
 
       0,0, 583,617:
         saturation: 0

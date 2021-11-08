@@ -9,6 +9,7 @@ textures:
     color_regions:
       0,1920 ,949,1920+64:
         mask: base_mask.png
+        color: 99
         comment: cab stripe
 
 
