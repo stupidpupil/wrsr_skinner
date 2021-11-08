@@ -47,10 +47,14 @@ class TextureWrapper
     end
 
     if self.texture_entry['logo_regions'].is_a? Array then
-      return self.texture_entry['logo_regions'].map {|lr| {geometry: lr, rotate:0}}
+      return self.texture_entry['logo_regions'].map {|lr| {geometry: lr, rotate:0, worn:false}}
     end
 
-    self.texture_entry['logo_regions'].map {|k,v| {geometry: k, rotate:(v&.[]('rotate') || 0)}}
+    self.texture_entry['logo_regions'].map {|k,v| {
+      geometry: k, 
+      rotate: (v&.[]('rotate') || 0),
+      worn: (v&.[]('worn') || false)
+    }}
 
   end
 
@@ -125,6 +129,17 @@ class TextureWrapper
 
     if not brand_logo_image.nil?
       self.logo_regions.each do |lr|
+
+        if lr[:worn] then
+          worn_mask = Image.read("data-raw/worn_logo_mask.png").first
+          worn_mask.resize!(brand_logo_image.columns, brand_logo_image.rows)
+          worn_mask.alpha(ActivateAlphaChannel)
+          worn_mask.fuzz = 50000
+          worn_mask = worn_mask.transparent('black')
+
+          brand_logo_image = brand_logo_image.composite(worn_mask, CenterGravity, DstInCompositeOp)
+        end
+
         # Resize logo
 
         region_points = lr[:geometry].split(",").map {|e| eval(e).to_i}
@@ -133,8 +148,6 @@ class TextureWrapper
         lr_height = region_points[3] - region_points[1]
 
         lg = brand_logo_image.rotate(lr[:rotate]).resize_to_fit(lr_width, lr_height)
-
-        # Rotate logo
 
         # Find centre of logo region
 
