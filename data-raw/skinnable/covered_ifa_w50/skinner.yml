@@ -6,7 +6,13 @@ textures:
         brightness: 1.05
         mask: base_mask.png
 
+
     color_regions:
+      0,1753 ,1446,1753+295:
+        mask: base_mask.png
+        comment: cab base
+        color: 98
+
       0,1920 ,949,1920+64:
         mask: base_mask.png
         color: 99
