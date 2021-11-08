@@ -7,6 +7,12 @@ textures:
         mask: base_mask.png
 
     color_regions:
+
+      0,0, 1024,1024:
+        mask: base_mask.png
+        comment: cab
+        color: 98
+
       0,424, 369,670:
         mask: base_bonnet_mask.png
         comment: bonnet (like cab stripe)
