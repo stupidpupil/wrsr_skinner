@@ -10,7 +10,6 @@ textures:
       0,424, 369,670:
         mask: base_bonnet_mask.png
         comment: bonnet (like cab stripe)
-        color: 99
 
   back.dds:
     modulate_regions:
