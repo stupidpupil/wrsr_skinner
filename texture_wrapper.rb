@@ -173,6 +173,8 @@ class TextureWrapper
     if not brand_logo_image.nil?
       self.logo_regions.each do |lr|
 
+        lg = brand_logo_image
+
         if lr[:worn] then
           worn_mask = Image.read("data-raw/worn_logo_mask.png").first
           worn_mask.resize!(brand_logo_image.columns, brand_logo_image.rows)
@@ -180,7 +182,7 @@ class TextureWrapper
           worn_mask.fuzz = 50000
           worn_mask = worn_mask.transparent('black')
 
-          brand_logo_image = brand_logo_image.composite(worn_mask, CenterGravity, DstInCompositeOp)
+          lg = lg.composite(worn_mask, CenterGravity, DstInCompositeOp)
         end
 
         # Resize logo
@@ -190,7 +192,7 @@ class TextureWrapper
         lr_width = region_points[2] - region_points[0]
         lr_height = region_points[3] - region_points[1]
 
-        lg = brand_logo_image.rotate(lr[:rotate]).resize_to_fit(lr_width, lr_height)
+        lg = lg.rotate(lr[:rotate]).resize_to_fit(lr_width, lr_height)
 
         # Find centre of logo region
 
