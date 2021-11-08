@@ -47,13 +47,14 @@ class TextureWrapper
     end
 
     if self.texture_entry['logo_regions'].is_a? Array then
-      return self.texture_entry['logo_regions'].map {|lr| {geometry: lr, rotate:0, worn:false}}
+      return self.texture_entry['logo_regions'].map {|lr| {geometry: lr, rotate:0, worn:false, barrier:true}}
     end
 
     self.texture_entry['logo_regions'].map {|k,v| {
       geometry: k, 
       rotate: (v&.[]('rotate') || 0),
-      worn: (v&.[]('worn') || false)
+      worn: (v&.[]('worn') || false),
+      barrier: (v&.[]('barrier').nil? ? true : v&.[]('barrier'))
     }}
 
   end
@@ -151,8 +152,22 @@ class TextureWrapper
 
         # Find centre of logo region
 
-        lr_centre_x = region_points[0] + (lr_width/2).to_i - (overlay.columns/2).to_i
-        lr_centre_y = region_points[1] + (lr_height/2).to_i - (overlay.rows/2).to_i
+        lr_centre_x = region_points[0] + (lr_width/2).to_i
+        lr_centre_y = region_points[1] + (lr_height/2).to_i
+
+        if lr[:barrier] then
+          region = Magick::Draw.new
+          
+          region.fill = brand.colors[0]
+
+          region.circle(lr_centre_x,lr_centre_y, lr_centre_x+lg.columns/2, lr_centre_y+lg.rows/2)
+
+          region.draw(overlay)
+        end
+
+        # Adjust for CenterGravity
+        lr_centre_x = lr_centre_x - (overlay.columns/2).to_i
+        lr_centre_y = lr_centre_y - (overlay.rows/2).to_i
 
         overlay.composite!(lg, CenterGravity, lr_centre_x, lr_centre_y, OverCompositeOp)
       end

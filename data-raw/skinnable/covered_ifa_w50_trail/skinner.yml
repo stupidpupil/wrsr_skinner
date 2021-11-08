@@ -18,3 +18,4 @@ textures:
       100,170, 213,280:
         rotate: -90
         worn: true
+        barrier: false
