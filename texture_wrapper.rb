@@ -201,7 +201,7 @@ class TextureWrapper
           worn_mask.fuzz = 50000
           worn_mask = worn_mask.transparent('black')
 
-          lg = lg.composite(worn_mask, CenterGravity, DstInCompositeOp)
+          lg = lg.composite(worn_mask, CenterGravity, DstInCompositeOp).modulate(0.8, 0.8, 1.0)
         end
 
         # Resize logo
