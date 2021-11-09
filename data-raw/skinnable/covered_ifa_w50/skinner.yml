@@ -31,9 +31,10 @@ textures:
       306+32,201, 306+32+16,512:
         color: 2
 
+      # Wooden hull
       0,0, 457,89:
         color: 70
-      430,291, 798,512:
+      428,291, 798,512:
         color: 70
 
     logo_regions:
