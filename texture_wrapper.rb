@@ -232,9 +232,6 @@ class TextureWrapper
     texture.quantize(256, YUVColorspace, FloydSteinbergDitherMethod)
     texture.colorspace = RGBColorspace
 
-    texture.define("dds:compression", "dxt1")
-    texture.define("dds:mipmaps", 1)
-
     return(texture)
 
   end

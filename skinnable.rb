@@ -25,7 +25,10 @@ class Skinnable
     self.skinnable_entry['textures'].keys.each do |tn|
       tw = TextureWrapper.new(self.skinnable_dir, tn)
       txtr = tw.texture_with_brand(br)
-      txtr.write("DDS:" + @skin_dir + "/" + tn)
+      txtr.write("DDS:" + @skin_dir + "/" + tn) { |img|
+        img.define("dds", "compression", "dxt1")
+        img.define("dds", "mipmaps", 1)
+      }
       txtr.write(@skin_dir + "/" + tn + ".png")
     end
 
