@@ -11,11 +11,11 @@ textures:
       0,1753 ,1446,1753+295:
         mask: base_mask.png
         comment: cab base
-        color: 98
+        color: 90
 
       0,1920 ,949,1920+64:
         mask: base_mask.png
-        color: 99
+        color: 91
         comment: cab stripe
 
 
@@ -23,12 +23,18 @@ textures:
     color_regions:
       0,142, 306,512:
       306,201, 417,201, 428,282, 417,360, 428,434, 417,512, 306,512:
+
       0,142+32, 306,142+32+16:
         color: 2
       0,512-32, 306,512-32-16:
         color: 2
       306+32,201, 306+32+16,512:
         color: 2
+
+      0,0, 457,89:
+        color: 70
+      430,291, 798,512:
+        color: 70
 
     logo_regions:
       30,419, 276,419+75:

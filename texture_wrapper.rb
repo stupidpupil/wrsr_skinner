@@ -151,8 +151,8 @@ class TextureWrapper
         
       end
 
-      # For anything other than the base colour, we punch out logo barriers
-      if color_i > 0 and not brand_logo_image.nil? then
+      # For anything other than a base colour, we punch out logo barriers
+      if (color_i%10) > 0 and not brand_logo_image.nil? then
 
         barrier_overlay = Image.new(overlay.columns, overlay.rows) { 
           self.depth=16; self.colorspace = RGBColorspace; self.background_color='transparent'}

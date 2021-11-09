@@ -12,6 +12,11 @@ class Brand
   # 1 - Logo
   # 2 - Horizontal small stripe
 
+  # 70 - wooden hull
+
+  # 90 - cab base
+  # 91 - cab big stripe
+
   def initialize(colors=['transparent', 'black'], logo_name=nil)
     @colors = colors
     @logo_name = logo_name
