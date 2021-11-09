@@ -1,0 +1,33 @@
+
+
+$SUBMATERIAL base
+
+
+$TEXTURE 0 vehicles/open_kmz_5320/base.dds
+$TEXTURE 1 blankspecular.dds
+$TEXTURE 2 blankbump.dds
+
+$DIFFUSECOLOR 0.8 0.8  0.8  1 
+$SPECULARCOLOR 1 1 1 1 
+$AMBIENTCOLOR 0.8 0.8  0.8  1 
+$SPECULARPOWER 2
+
+
+
+$SUBMATERIAL opencrane
+
+
+$TEXTURE 0 vehicles/open_kmz_5320/opencrane.dds
+$TEXTURE 1 blankspecular.dds
+$TEXTURE 2 blankbump.dds
+
+$DIFFUSECOLOR 0.8 0.8  0.8  1 
+$SPECULARCOLOR 1 1 1 1 
+$AMBIENTCOLOR 0.8 0.8  0.8  1 
+$SPECULARPOWER 2
+
+
+
+$END
+
+
