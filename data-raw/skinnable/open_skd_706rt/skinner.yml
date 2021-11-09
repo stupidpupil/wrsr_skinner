@@ -7,6 +7,13 @@ textures:
         mask: chasis_roof_mask.png
         comment: cab base (roof)
         brightness: 0.6
+        saturation: 0.3
+
+      112,211 ,209,263:
+        comment: cab base (roof)
+        brightness: 0.6
+        saturation: 0.3
+
 
     color_regions:
       0,0 ,432,851:
