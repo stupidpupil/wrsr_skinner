@@ -19,32 +19,32 @@ textures:
       0,0 ,432,851:
         mask: chasis_mask.png
         comment: cab base
-        color: 90
+        color: 50
 
       433,0 ,730,352:
         mask: chasis_mask.png
         comment: cab base (roof)
-        color: 90
+        color: 50
 
       705,570, 1024,875:
         mask: chasis_mask.png
         comment: cab base
-        color: 90
+        color: 50
 
       0,414, 439,414+120:
         mask: chasis_mask.png
         comment: cab stripe
-        color: 91
+        color: 60
 
       15,686, 15+327,686+120:
         mask: chasis_mask.png
         comment: cab stripe
-        color: 91
+        color: 60
 
       701,695, 1024,695+120:
         mask: chasis_mask.png
         comment: cab stripe
-        color: 91
+        color: 60
 
   open.dds:
     modulate_regions:

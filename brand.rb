@@ -14,8 +14,8 @@ class Brand
 
   # 70 - wooden hull
 
-  # 90 - cab base
-  # 91 - cab big stripe
+  # 50 - cab base
+  # 60 - cab big stripe
 
   def initialize(colors=['transparent', 'black'], logo_name=nil)
     @colors = colors
