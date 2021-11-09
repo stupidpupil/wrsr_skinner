@@ -1,5 +1,9 @@
 textures:
   cistern.dds:
+    modulate_regions:
+      0,300, 411,300+212:
+        saturation: 0.2
+
     color_regions:
       0,300, 411,300+212:
 
