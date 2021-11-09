@@ -1,0 +1,16 @@
+textures:
+  cistern.dds:
+    modulate_regions:
+      0,0, 1024,1024:
+        saturation: 0
+        mask: cistern_mask.png
+
+    color_regions:
+      0,0, 1024,1024:
+        mask: cistern_mask.png
+
+      23,897, 326,878:
+        color: 2
+
+    logo_regions:
+      100,828, 250,922:
