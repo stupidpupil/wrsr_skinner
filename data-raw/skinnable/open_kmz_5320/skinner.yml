@@ -3,7 +3,7 @@ textures:
     modulate_regions:
       0,440, 335,440+67:
         saturation: 0.7
-        brightness: 1.1
+        brightness: 1.7
         mask: base_mask.png
 
     color_regions:
