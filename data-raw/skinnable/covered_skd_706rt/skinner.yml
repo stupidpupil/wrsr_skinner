@@ -33,5 +33,7 @@ textures:
     logo_regions:
       12,283, 8+130,283+350:
         rotate: 90
+        flip_x: true
+
       547,283, 547+130,283+350:
         rotate: -90

@@ -205,6 +205,10 @@ class TextureWrapper
           lg = lg.composite(worn_mask, CenterGravity, DstInCompositeOp).modulate(0.8, 0.8, 1.0)
         end
 
+        if lr[:flip_x] then
+          lg = lg.flop
+        end
+
         # Resize logo
 
         region_points = lr[:geometry].split(",").map {|e| eval(e).to_i}
@@ -215,7 +219,6 @@ class TextureWrapper
         lg = lg.rotate(lr[:rotate]).resize_to_fit(lr_width, lr_height)
 
         # Find centre of logo region
-
         lr_centre_x = region_points[0] + (lr_width/2).to_i
         lr_centre_y = region_points[1] + (lr_height/2).to_i
 

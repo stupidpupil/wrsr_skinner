@@ -6,7 +6,7 @@ class Brand
 
   attr_reader :colors, :logo_name, :override_logo_flip_x
 
-  def initialize(colors=['transparent', 'black'], logo_name=nil, override_logo_flip_x = false)
+  def initialize(colors=['transparent', 'black'], logo_name=nil)
 
     color_translate = {
       base: 0,
@@ -28,7 +28,6 @@ class Brand
 
     end
 
-    @override_logo_flip_x = override_logo_flip_x
     @colors = colors
     @logo_name = logo_name
   end

@@ -32,5 +32,7 @@ textures:
 
     logo_regions:
       79,37, 443,200:
+        flip_x: true
       79,271+37, 443,271+200:
+        flip_x: true
 
