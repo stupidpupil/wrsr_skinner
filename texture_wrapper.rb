@@ -52,7 +52,7 @@ class TextureWrapper
     end
 
     if self.texture_entry['logo_regions'].is_a? Array then
-      return self.texture_entry['logo_regions'].map {|lr| {geometry: lr, rotate:0, worn:false, barrier:true}}
+      return self.texture_entry['logo_regions'].map {|lr| {geometry: lr, rotate:0, worn:false, barrier:true, flip_x: false}}
     end
 
     self.texture_entry['logo_regions'].map {|k,v| {
@@ -60,7 +60,8 @@ class TextureWrapper
       rotate: (v&.[]('rotate') || 0),
       worn: (v&.[]('worn') || false),
       barrier: (v&.[]('barrier').nil? ? true : v&.[]('barrier')),
-      mask: v&.[]('mask')
+      mask: v&.[]('mask'),
+      flip_x: v&.[]('flip_x') || false,
     }}
 
   end
@@ -77,8 +78,8 @@ class TextureWrapper
       mod_texture = orig_texture.modulate(drs[:brightness], drs[:saturation], drs[:hue])
       mod_texture.alpha(ActivateAlphaChannel)
 
-      mod_mask = Image.new(texture.columns, texture.rows) { 
-        self.depth=16; self.colorspace = RGBColorspace; self.background_color='transparent'}
+      mod_mask = Image.new(texture.columns, texture.rows) { |img|
+        img.depth=16; img.colorspace = RGBColorspace; img.background_color='transparent'}
 
       if drs[:mask]
         supplied_mask = Image.read(self.skinnable_dir + "/" + drs[:mask]).first
@@ -107,8 +108,8 @@ class TextureWrapper
     orig_texture = nil
 
 
-    overlay = Image.new(texture.columns, texture.rows) { 
-      self.depth=16; self.colorspace = RGBColorspace; self.background_color='transparent'}
+    overlay = Image.new(texture.columns, texture.rows) { |img|
+      img.depth=16; img.colorspace = RGBColorspace; img.background_color='transparent'}
     overlay.alpha(ActivateAlphaChannel)
 
     #base = Image.new(texture.columns, texture.rows) { 
@@ -119,8 +120,8 @@ class TextureWrapper
 
       region_color = brand.colors[color_i]
 
-      color_overlay = Image.new(overlay.columns, overlay.rows) { 
-        self.depth=16; self.colorspace = RGBColorspace; self.background_color='transparent'}
+      color_overlay = Image.new(overlay.columns, overlay.rows) { |img|
+        img.depth=16; img.colorspace = RGBColorspace; img.background_color='transparent'}
 
       color_overlay.alpha(ActivateAlphaChannel)
 
@@ -154,8 +155,8 @@ class TextureWrapper
       # For anything other than a base colour, we punch out logo barriers
       if (color_i%10) > 0 and not brand_logo_image.nil? then
 
-        barrier_overlay = Image.new(overlay.columns, overlay.rows) { 
-          self.depth=16; self.colorspace = RGBColorspace; self.background_color='transparent'}
+        barrier_overlay = Image.new(overlay.columns, overlay.rows) { |img|
+          img.depth=16; img.colorspace = RGBColorspace; img.background_color='transparent'}
 
         barrier_overlay.alpha(ActivateAlphaChannel)
 

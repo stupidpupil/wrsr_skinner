@@ -4,9 +4,9 @@ class Brand
 
   include Magick
 
-  attr_reader :colors, :logo_name
+  attr_reader :colors, :logo_name, :override_logo_flip_x
 
-  def initialize(colors=['transparent', 'black'], logo_name=nil)
+  def initialize(colors=['transparent', 'black'], logo_name=nil, override_logo_flip_x = false)
 
     color_translate = {
       base: 0,
@@ -28,7 +28,7 @@ class Brand
 
     end
 
-
+    @override_logo_flip_x = override_logo_flip_x
     @colors = colors
     @logo_name = logo_name
   end
@@ -53,7 +53,7 @@ class Brand
     ret = ret.channel(RedChannel|GreenChannel|BlueChannel).negate().composite(ret, CenterGravity, CopyAlphaCompositeOp)
     ret.alpha(ActivateAlphaChannel)
 
-    overlay = Image.new(ret.columns, ret.rows) {self.background_color = logo_color; }
+    overlay = Image.new(ret.columns, ret.rows) { |img| img.background_color = logo_color; }
 
     ret.composite(overlay, CenterGravity, MultiplyCompositeOp).composite(ret, CenterGravity, CopyAlphaCompositeOp)
   end
