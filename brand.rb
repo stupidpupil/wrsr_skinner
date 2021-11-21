@@ -6,18 +6,29 @@ class Brand
 
   attr_reader :colors, :logo_name
 
-  #
-  # Colors list
-  # 0 - Base
-  # 1 - Logo
-  # 2 - Horizontal small stripe
-
-  # 70 - wooden hull
-
-  # 50 - cab base
-  # 60 - cab big stripe
-
   def initialize(colors=['transparent', 'black'], logo_name=nil)
+
+    color_translate = {
+      base: 0,
+      logo: 1,
+      stripe: 2,
+      wooden_hull_base: 70,
+      cab_base: 50,
+      cab_stripe_base: 60
+    }
+
+    if colors.is_a? Hash then
+      ch = colors
+
+      colors = []
+
+      color_translate.each_pair do |k,v|
+        colors[v] = ch[k]
+      end
+
+    end
+
+
     @colors = colors
     @logo_name = logo_name
   end
