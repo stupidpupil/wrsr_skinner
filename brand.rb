@@ -4,7 +4,7 @@ class Brand
 
   include Magick
 
-  attr_reader :colors, :logo_name, :override_logo_flip_x
+  attr_reader :colors, :logo_name, :override_logo_flip_x, :logo_image
 
   def initialize(colors=['transparent', 'black'], logo_name=nil)
 
@@ -30,13 +30,14 @@ class Brand
 
     @colors = colors
     @logo_name = logo_name
+    @logo_image = self.generate_logo_image.freeze
   end
 
   def logo_path
     "data-raw/logos/#{self.logo_name}.png"
   end
 
-  def logo_image
+  def generate_logo_image
     return nil if self.logo_name.nil?
 
     logo_color = self.colors[1]
