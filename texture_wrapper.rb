@@ -101,20 +101,14 @@ class TextureWrapper
       region.draw(mod_mask)
 
       mod_texture.composite!(mod_mask, CenterGravity, DstInCompositeOp)
-
-      texture = texture.composite(mod_texture, CenterGravity, OverCompositeOp)
+      texture.composite!(mod_texture, CenterGravity, OverCompositeOp)
     end
 
     orig_texture = nil
 
-
     overlay = Image.new(texture.columns, texture.rows) { |img|
       img.depth=16; img.colorspace = RGBColorspace; img.background_color='transparent'}
     overlay.alpha(ActivateAlphaChannel)
-
-    #base = Image.new(texture.columns, texture.rows) { 
-    #  self.depth=16; self.colorspace = RGBColorspace;  self.background_color='transparent'}
-    #texture = base.composite(texture, CenterGravity, SrcCompositeOp)
 
     self.color_regions.group_by {|cr| cr[:color]}.each do |color_i, crs_for_color|
 
@@ -171,7 +165,8 @@ class TextureWrapper
           lr_centre_x = region_points[0] + (lr_width/2).to_i
           lr_centre_y = region_points[1] + (lr_height/2).to_i
 
-          lg = brand_logo_image.rotate(lr[:rotate]).resize_to_fit(lr_width, lr_height)
+          # TODO Fix the inefficiency of actually doing this twice
+          lg = brand_logo_image.rotate(lr[:rotate]).resize_to_fit(lr_width, lr_height) 
 
           region = Magick::Draw.new
           
@@ -193,7 +188,7 @@ class TextureWrapper
     if not brand_logo_image.nil?
       self.logo_regions.each do |lr|
 
-        lg = brand_logo_image
+        lg = brand_logo_image.copy
 
         if lr[:worn] then
           worn_mask = Image.read("data-raw/worn_logo_mask.png").first
@@ -202,11 +197,11 @@ class TextureWrapper
           worn_mask.fuzz = 50000
           worn_mask = worn_mask.transparent('black')
 
-          lg = lg.composite(worn_mask, CenterGravity, DstInCompositeOp).modulate(0.8, 0.8, 1.0)
+          lg.composite!(worn_mask, CenterGravity, DstInCompositeOp).modulate(0.8, 0.8, 1.0)
         end
 
         if lr[:flip_x] then
-          lg = lg.flop
+          lg.flop!
         end
 
         # Resize logo
@@ -216,7 +211,7 @@ class TextureWrapper
         lr_width = region_points[2] - region_points[0]
         lr_height = region_points[3] - region_points[1]
 
-        lg = lg.rotate(lr[:rotate]).resize_to_fit(lr_width, lr_height)
+        lg.rotate!(lr[:rotate]).resize_to_fit!(lr_width, lr_height)
 
         # Find centre of logo region
         lr_centre_x = region_points[0] + (lr_width/2).to_i
