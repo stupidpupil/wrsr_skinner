@@ -1,0 +1,29 @@
+textures:
+  covered.dds:
+    modulate_regions:
+      0,0, 1024,1024:
+        saturation: 0
+        brightness: 1.5
+        mask: covered_mask.png
+
+    color_regions:
+      0,0, 1024,1024:
+        mask: covered_mask.png
+
+      0,125, 1024,155:
+        color: 2
+        mask: covered_mask.png
+
+      0,125+271, 1024,155+271:
+        color: 2
+        mask: covered_mask.png
+
+      0,763+(125*215/240), 1024,763+(155*215/240):
+        color: 2
+        mask: covered_mask.png
+
+    logo_regions:
+      79,37, 443,200:
+        flip_x: true
+      79,271+37, 443,271+200:
+        flip_x: true

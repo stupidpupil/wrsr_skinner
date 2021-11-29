@@ -1,0 +1,21 @@
+textures:
+  base.dds:
+    modulate_regions:
+      0,0, 1024,1024:
+        saturation: 0
+        brightness: 1.1
+        mask: base_mask.png
+
+    color_regions:
+      0,0, 1024,1024:
+        color: 50
+        mask: base_mask.png
+
+      0,113, 559,113+70:
+        color: 60
+        mask: base_mask.png
+
+      0,366, 336,366+82:
+        color: 60
+        mask: base_mask.png
+        
