@@ -34,15 +34,22 @@ class TextureWrapper
       return []
     end
 
+    color_region_default = {
+      color: 0,
+      mask: nil
+    }
+
     if self.texture_entry['color_regions'].is_a? Array then
-      return self.texture_entry['color_regions'].map {|cr| {geometry: cr, color:0}}
+      return self.texture_entry['color_regions'].map {|cr| color_region_default.merge(geometry: cr)}
     end
 
-    self.texture_entry['color_regions'].map {|k,v| {
-      geometry: k, 
-      color:(v&.[]('color') || v&.[]('colour') || 0),
-      mask: v&.[]('mask')
-    }}
+    self.texture_entry['color_regions'].map {|k,v| 
+      color_region_default.merge({
+        geometry: k, 
+        color: ( v&.[]('color') || v&.[]('colour') ),
+        mask: v&.[]('mask')
+      }.compact)
+    }
 
   end
 
@@ -51,18 +58,27 @@ class TextureWrapper
       return []
     end
 
+    logo_region_default = {
+      rotate: 0,
+      worn: false,
+      barrier: true,
+      flip_x: false
+    }
+
     if self.texture_entry['logo_regions'].is_a? Array then
-      return self.texture_entry['logo_regions'].map {|lr| {geometry: lr, rotate:0, worn:false, barrier:true, flip_x: false}}
+      return self.texture_entry['logo_regions'].map {|lr| logo_region_default.merge(geometry: lr)}
     end
 
-    self.texture_entry['logo_regions'].map {|k,v| {
-      geometry: k, 
-      rotate: (v&.[]('rotate') || 0),
-      worn: (v&.[]('worn') || false),
-      barrier: (v&.[]('barrier').nil? ? true : v&.[]('barrier')),
-      mask: v&.[]('mask'),
-      flip_x: v&.[]('flip_x') || false,
-    }}
+    self.texture_entry['logo_regions'].map {|k,v| 
+      logo_region_default.merge({
+        geometry: k, 
+        rotate: v&.[]('rotate'),
+        worn: v&.[]('worn'),
+        barrier: v&.[]('barrier'),
+        mask: v&.[]('mask'),
+        flip_x: v&.[]('flip_x'),
+      }.compact)
+    }
 
   end
 
