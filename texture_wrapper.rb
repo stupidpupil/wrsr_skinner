@@ -82,8 +82,7 @@ class TextureWrapper
 
   end
 
-  def texture_with_brand(brand)
-    brand_logo_image = brand.logo_image
+  def modulated_texture
 
     texture = Image.read(self.texture_path).first
     texture.colorspace = RGBColorspace
@@ -119,6 +118,14 @@ class TextureWrapper
       mod_texture.composite!(mod_mask, CenterGravity, DstInCompositeOp)
       texture.composite!(mod_texture, CenterGravity, OverCompositeOp)
     end
+
+    return(texture)
+  end
+
+  def texture_with_brand(brand)
+    brand_logo_image = brand.logo_image
+
+    texture = self.modulated_texture
 
     orig_texture = nil
 
