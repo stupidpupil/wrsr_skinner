@@ -6,12 +6,7 @@ module WRSRSkinner
 
     attr_reader :colors, :logo_name, :override_logo_flip_x, :logo_image
 
-    def initialize(colors=['transparent', 'black'], logo_name=nil)
-
-      if colors.is_a? Hash then
-        colors = TextureWrapper::ColorLayers.map { |e| colors[e.to_sym] }
-      end
-
+    def initialize(colors={}, logo_name=nil)
       @colors = colors
       @logo_name = logo_name
       @logo_image = self.generate_logo_image.freeze
@@ -24,7 +19,7 @@ module WRSRSkinner
     def generate_logo_image
       return nil if self.logo_name.nil?
 
-      logo_color = self.colors[1]
+      logo_color = self.colors[:logo]
 
       ret = Image.read(self.logo_path).first
       ret.colorspace = RGBColorspace

@@ -116,7 +116,6 @@ module WRSRSkinner
     end
 
     def modulated_texture
-
       cache_path = self.modulated_texture_cache_path
 
       if File.file?(cache_path)
@@ -178,7 +177,7 @@ module WRSRSkinner
 
       col_reg.group_by {|cr| cr[:color]}.each do |color_i, crs_for_color|
 
-        region_color = brand.colors[color_i]
+        region_color = brand.colors[crs_for_color[0][:layer].to_sym]
 
         color_overlay = Image.new(overlay.columns, overlay.rows) { |img|
           img.depth=16; img.colorspace = RGBColorspace; img.background_color='transparent'}
@@ -236,7 +235,7 @@ module WRSRSkinner
 
             region = Magick::Draw.new
             
-            region.fill = brand.colors[0]
+            region.fill = 'white'
 
             region.circle(lr_centre_x,lr_centre_y, lr_centre_x+lg.columns/2, lr_centre_y+lg.rows/2)
 
