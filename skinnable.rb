@@ -18,20 +18,27 @@ class Skinnable
     FileUtils.mkdir_p(@skin_dir)
   end
 
-  def save_textures_with_brand(br)
+  def textures_with_brand(br)
+    return {} if self.skinnable_entry['textures'].nil?
 
-    return if self.skinnable_entry['textures'].nil?
+    ret = {}
 
     self.skinnable_entry['textures'].keys.each do |tn|
       tw = TextureWrapper.new(self.skinnable_dir, tn)
-      txtr = tw.texture_with_brand(br)
+      ret[tn] = tw.texture_with_brand(br)
+    end
+
+    return(ret)
+  end
+
+  def save_textures_with_brand(br)
+    self.textures_with_brand(br).each_pair do |tn, txtr|
       txtr.write("DDS:" + @skin_dir + "/" + tn) { |img|
         img.define("dds", "compression", "dxt1")
         img.define("dds", "mipmaps", 1)
       }
       txtr.write(@skin_dir + "/" + tn + ".png")
     end
-
   end
 
   def save_material()
