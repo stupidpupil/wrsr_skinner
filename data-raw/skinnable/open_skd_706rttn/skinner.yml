@@ -35,21 +35,21 @@ textures:
 
     color_regions:
       0,0, 882,134:
-        color: 70
+        layer: wooden_hull_base
       957,0, 1024,277:
-        color: 70
+        layer: wooden_hull_base
       0,300, 257,458:
-        color: 70
+        layer: wooden_hull_base
       257,336, 520,458:
-        color: 70
+        layer: wooden_hull_base
       520,310, 550,458:
-        color: 70
+        layer: wooden_hull_base
       0,458, 900,1024:
-        color: 70
+        layer: wooden_hull_base
       900,767, 1024,1024:
-        color: 70
+        layer: wooden_hull_base
       344,197, 612,272:
-        color: 70
+        layer: wooden_hull_base
 
     logo_regions:
       69,807, 222,993:

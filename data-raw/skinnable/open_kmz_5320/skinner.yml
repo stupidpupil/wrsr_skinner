@@ -8,14 +8,14 @@ textures:
 
     color_regions:
       0,0, 1024,1024:
-        color: 50
+        layer: cab_base
         mask: base_mask.png
 
       0,113, 559,113+70:
-        color: 60
+        layer: cab_stripe_base
         mask: base_mask.png
 
 
       0,366, 336,366+82:
-        color: 60
+        layer: cab_stripe_base
         mask: base_mask.png

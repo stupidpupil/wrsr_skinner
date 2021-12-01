@@ -18,23 +18,19 @@ textures:
       0,494, 0,355, 136,338, 268,351, 136+269,338, 536,355, 536,494:
 
       0,979, 884,979-20:
-        color: 2
-
+        layer: stripe
       0,536, 884,536+20:
-        color: 2
-
+        layer: stripe
       0,452, 536,452-20:
-        color: 2
-
+        layer: stripe
       0,0, 880,135:
-        color: 70
+        layer: wooden_hull_base
       354,193, 613,265:
-        color: 70
+        layer: wooden_hull_base
       965,268, 1024,0:
-        color: 70
+        layer: wooden_hull_base
       930,775, 1024,1024:
-        color: 70
-
+        layer: wooden_hull_base
 
     logo_regions:
       460,910, 460+417,910+92:

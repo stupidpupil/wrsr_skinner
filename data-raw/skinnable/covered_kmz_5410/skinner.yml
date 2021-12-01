@@ -11,15 +11,15 @@ textures:
         mask: covered_mask.png
 
       0,125, 1024,155:
-        color: 2
+        layer: stripe
         mask: covered_mask.png
 
       0,125+271, 1024,155+271:
-        color: 2
+        layer: stripe
         mask: covered_mask.png
 
       0,763+(125*215/240), 1024,763+(155*215/240):
-        color: 2
+        layer: stripe
         mask: covered_mask.png
 
     logo_regions:

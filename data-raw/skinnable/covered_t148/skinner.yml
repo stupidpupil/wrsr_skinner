@@ -10,9 +10,9 @@ textures:
       0,0, 1024,1024:
         mask: base_mask.png
         comment: cab
-        color: 50
+        layer: cab_base
 
       336,330, 730,649:
         mask: base_bonnet_mask.png
         comment: bonnet (like cab stripe)
-        color: 60
+        layer: cab_stripe_base

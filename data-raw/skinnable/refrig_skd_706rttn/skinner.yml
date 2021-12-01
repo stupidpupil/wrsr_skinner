@@ -12,15 +12,15 @@ textures:
       0,319, 897,1024:
 
       0,425, 897,455:
-        color: 2
+        layer: stripe
         comment: side stripe
 
       0,896, 897,896+29:
-        color: 2
+        layer: stripe
         comment: side stripe
 
       0,135, 246,135+29:
-        color: 2
+        layer: stripe
         comment: rear stripe
 
     logo_regions:

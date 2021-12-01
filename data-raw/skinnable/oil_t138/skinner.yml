@@ -2,4 +2,4 @@ textures:
   back.dds:
     modulate_regions:
       0,0, 1024,1024:
-        saturation: 0
+        saturation: 1

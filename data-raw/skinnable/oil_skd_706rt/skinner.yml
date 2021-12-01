@@ -10,7 +10,6 @@ textures:
         mask: cistern_mask.png
 
       23,897, 326,878:
-        color: 2
-
+        layer: stripe
     logo_regions:
       100,828, 250,922:

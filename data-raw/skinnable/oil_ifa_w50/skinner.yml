@@ -8,15 +8,15 @@ textures:
       0,300, 411,300+212:
 
       74,323, 74+12,323+189:
-        color: 2
+        layer: stripe
         comment: tank side
 
       219-12,323, 219,323+189:
-        color: 2
+        layer: stripe
         comment: tank side
 
       294,358, 294+100,358+12:
-        color: 2
+        layer: stripe
         comment: tank rear
 
     logo_regions:

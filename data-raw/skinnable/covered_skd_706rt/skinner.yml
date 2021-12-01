@@ -17,19 +17,15 @@ textures:
       698,296, 881,296, 899,472, 882,633, 882,667, 898,828, 880,1002, 702,1004:
 
       0+26+24,271, 0+26+24+24,735+271:
-        color: 2
-
+        layer: stripe
       698-38-24,271, 698-38-24-24,735+271:
-        color: 2
-
+        layer: stripe
       751,296, 751+24,1004:
-        color: 2
-
+        layer: stripe
       0,0, 733,177:
-        color: 70
+        layer: wooden_hull_base
       0,178, 704,270:
-        color: 70
-
+        layer: wooden_hull_base
     logo_regions:
       12,283, 8+130,283+350:
         rotate: 90

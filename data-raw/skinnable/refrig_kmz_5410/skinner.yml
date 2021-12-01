@@ -11,14 +11,11 @@ textures:
         mask: refrig_mask.png
 
       0,34+232, 2048,34+232+64:
-        color: 2
-
+        layer: stripe
       0,579+232, 2048,579+232+64:
-        color: 2
-
+        layer: stripe
       35,1772, 35+370,1772+51:
-        color: 2
-
+        layer: stripe
     logo_regions:
       29,34+20, 29+1013,34+20+425:
         flip_x: true

@@ -19,32 +19,32 @@ textures:
       0,0 ,432,851:
         mask: chasis_mask.png
         comment: cab base
-        color: 50
+        layer: cab_base
 
       433,0 ,730,352:
         mask: chasis_mask.png
         comment: cab base (roof)
-        color: 50
+        layer: cab_base
 
       705,570, 1024,875:
         mask: chasis_mask.png
         comment: cab base
-        color: 50
+        layer: cab_base
 
       0,414, 439,414+120:
         mask: chasis_mask.png
         comment: cab stripe
-        color: 60
+        layer: cab_stripe_base
 
       15,686, 15+327,686+120:
         mask: chasis_mask.png
         comment: cab stripe
-        color: 60
+        layer: cab_stripe_base
 
       701,695, 1024,695+120:
         mask: chasis_mask.png
         comment: cab stripe
-        color: 60
+        layer: cab_stripe_base
 
   open.dds:
     modulate_regions:
@@ -74,19 +74,19 @@ textures:
 
     color_regions:      
       0,0, 734,178:
-        color: 70
+        layer: wooden_hull_base
       0,179, 706,264:
-        color: 70
+        layer: wooden_hull_base
       0,264, 653,339:
-        color: 70
+        layer: wooden_hull_base
       339,264, 706,264, 654,339:
-        color: 70
+        layer: wooden_hull_base
       0,419, 848,1024:
-        color: 70
+        layer: wooden_hull_base
       0,340, 814,418:
-        color: 70
-
+        layer: wooden_hull_base
     logo_regions:
       90,727, 90+225,727+239:
         rotate: -90
         worn: true
+        

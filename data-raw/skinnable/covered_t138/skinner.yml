@@ -11,12 +11,12 @@ textures:
       0,0, 1024,1024:
         mask: base_mask.png
         comment: cab
-        color: 50
+        layer: cab_base
 
       0,424, 369,670:
         mask: base_bonnet_mask.png
         comment: bonnet (like cab stripe)
-        color: 60
+        layer: cab_stripe_base
 
   back.dds:
     modulate_regions:
@@ -34,24 +34,19 @@ textures:
       584,0, 584+375, 412:
 
       0,575, 583,575+3, 583,575+3-20, 0,575-20:
-        color: 2
-
+        layer: stripe
       0,45, 583,42, 583,42+20, 0,45+20:
-        color: 2
-
+        layer: stripe
       603-15,368, 887+5,368-20:
-        color: 2
-
+        layer: stripe
       603-15,160, 887+5,160-20:
-        color: 2
-
+        layer: stripe
       0,646, 584,798:
-        color: 70
+        layer: wooden_hull_base
       445,798, 1024,1024:
-        color: 70
+        layer: wooden_hull_base
       584,575, 898,812:
-        color: 70
-
+        layer: wooden_hull_base
 
     logo_regions:
       66,471, 66+444,471+90+20:

@@ -10,13 +10,11 @@ textures:
     color_regions:
       0,1753 ,1446,1753+295:
         mask: base_mask.png
-        comment: cab base
-        color: 50
+        layer: cab_base
 
       0,1920 ,949,1920+64:
         mask: base_mask.png
-        color: 60
-        comment: cab stripe
+        layer: cab_stripe_base
 
 
   covered.dds:
@@ -25,17 +23,17 @@ textures:
       306,201, 417,201, 428,282, 417,360, 428,434, 417,512, 306,512:
 
       0,142+32, 306,142+32+16:
-        color: 2
+        layer: stripe
       0,512-32, 306,512-32-16:
-        color: 2
+        layer: stripe
       306+32,201, 306+32+16,512:
-        color: 2
+        layer: stripe
 
       # Wooden hull
       0,0, 457,89:
-        color: 70
+        layer: wooden_hull_base
       428,291, 798,512:
-        color: 70
+        layer: wooden_hull_base
 
     logo_regions:
       30,419, 276,419+75:

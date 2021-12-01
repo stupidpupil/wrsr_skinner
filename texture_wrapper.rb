@@ -4,6 +4,15 @@ require 'digest'
 
 class TextureWrapper
 
+  ColorLayers = [
+    'base',
+    'logo',
+    'stripe',
+    'wooden_hull_base',
+    'cab_base',
+    'cab_stripe_base'
+  ]
+
   include Magick
 
   attr_reader :skinnable_dir, :texture_path, :texture_entry
@@ -36,7 +45,7 @@ class TextureWrapper
     end
 
     color_region_default = {
-      color: 0,
+      layer: 'base',
       mask: nil
     }
 
@@ -47,7 +56,7 @@ class TextureWrapper
     self.texture_entry['color_regions'].map {|k,v| 
       color_region_default.merge({
         geometry: k, 
-        color: ( v&.[]('color') || v&.[]('colour') ),
+        layer: v&.[]('layer'),
         mask: v&.[]('mask')
       }.compact)
     }
@@ -166,7 +175,10 @@ class TextureWrapper
       img.depth=16; img.colorspace = RGBColorspace; img.background_color='transparent'}
     overlay.alpha(ActivateAlphaChannel)
 
-    self.color_regions.group_by {|cr| cr[:color]}.each do |color_i, crs_for_color|
+    col_reg = self.color_regions
+    col_reg.each { |cr|  cr[:color] = ColorLayers.index(cr[:layer])}
+
+    col_reg.group_by {|cr| cr[:color]}.each do |color_i, crs_for_color|
 
       region_color = brand.colors[color_i]
 
@@ -203,7 +215,7 @@ class TextureWrapper
       end
 
       # For anything other than a base colour, we punch out logo barriers
-      if (color_i%10) > 0 and not brand_logo_image.nil? then
+      if not (crs_for_color[0][:layer] =~ /[^_]base[_$]/) and not brand_logo_image.nil? then
 
         barrier_overlay = Image.new(overlay.columns, overlay.rows) { |img|
           img.depth=16; img.colorspace = RGBColorspace; img.background_color='transparent'}

@@ -8,24 +8,8 @@ class Brand
 
   def initialize(colors=['transparent', 'black'], logo_name=nil)
 
-    color_translate = {
-      base: 0,
-      logo: 1,
-      stripe: 2,
-      wooden_hull_base: 70,
-      cab_base: 50,
-      cab_stripe_base: 60
-    }
-
     if colors.is_a? Hash then
-      ch = colors
-
-      colors = []
-
-      color_translate.each_pair do |k,v|
-        colors[v] = ch[k]
-      end
-
+      colors = TextureWrapper::ColorLayers.map { |e| colors[e.to_sym] }
     end
 
     @colors = colors

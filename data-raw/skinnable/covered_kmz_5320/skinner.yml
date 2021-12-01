@@ -13,23 +13,17 @@ textures:
       0,539, 1024,976:
 
       0,125, 1024,155:
-        color: 2
-
+        layer: stripe
       0,125+271, 1024,155+271:
-        color: 2
-
+        layer: stripe
       0,763+(125*215/240), 1024,763+(155*215/240):
-        color: 2
-
+        layer: stripe
       0,234, 1024,270:
-        color: 70
-
+        layer: wooden_hull_base
       0,234+271, 1024,270+270:
-        color: 70
-
+        layer: wooden_hull_base
       0,977, 1024,1024:
-        color: 70
-
+        layer: wooden_hull_base
     logo_regions:
       79,37, 443,200:
         flip_x: true
