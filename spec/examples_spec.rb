@@ -27,4 +27,23 @@ describe WRSRSkinner::Skinnable do
 
   end
 
+  describe 'when I brown-textile-brand a Skoda 706 (Covered trailer)' do
+
+    brown_textile_brand = WRSRSkinner::Brand.new({
+      base: "hsb(32, 74%, 70%)", 
+      logo: "rgb(85%, 85%, 85%)",
+      wooden_hull_base: "hsb(32, 40%, 60%)"
+    }, "textind")
+
+    covered_skd_706rttn = WRSRSkinner::Skinnable.new("covered_skd_706rttn")
+
+    textures = covered_skd_706rttn.textures_with_brand(brown_textile_brand)
+    signatures = textures.map {|k,v| [k, v.signature]}.to_h
+
+    it 'must give the correct signature for covered.dds' do
+      signatures['covered.dds'].should.equal '23642dcfdf7e86a5ec847b13a3d48da3619a2a6ed6d9c771d9e4aadbef5b6f2f'
+    end
+
+  end
+
 end
