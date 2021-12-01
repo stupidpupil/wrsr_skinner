@@ -215,7 +215,7 @@ class TextureWrapper
       end
 
       # For anything other than a base colour, we punch out logo barriers
-      if not (crs_for_color[0][:layer] =~ /[^_]base[_$]/) and not brand_logo_image.nil? then
+      if not (crs_for_color[0][:layer] =~ /(^|_)base(_|$)/) and not brand_logo_image.nil? then
 
         barrier_overlay = Image.new(overlay.columns, overlay.rows) { |img|
           img.depth=16; img.colorspace = RGBColorspace; img.background_color='transparent'}
