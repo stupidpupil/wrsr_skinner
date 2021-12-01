@@ -25,7 +25,7 @@ module WRSRSkinner
       ret = ret.transparent("#FDFAE9")
       ret = ret.transparent("#FFFFFF")
 
-      ret = ret.channel(RedChannel|GreenChannel|BlueChannel).negate().composite(ret, CenterGravity, CopyAlphaCompositeOp)
+      #ret = ret.channel(RedChannel|GreenChannel|BlueChannel).negate().composite(ret, CenterGravity, CopyAlphaCompositeOp)
       ret.alpha(ActivateAlphaChannel)
 
       @logo_mask_memo = ret.freeze
@@ -34,11 +34,10 @@ module WRSRSkinner
     end
 
     def logo_with_color(logo_color)
-      ret = self.logo_mask.copy
-
-      overlay = Image.new(ret.columns, ret.rows) { |img| img.background_color = logo_color; }
-
-      ret.composite(overlay, CenterGravity, MultiplyCompositeOp).composite(ret, CenterGravity, CopyAlphaCompositeOp)
+      mask = self.logo_mask
+      overlay = Image.new(mask.columns, mask.rows) { |img| img.background_color = logo_color}
+      overlay.alpha(ActivateAlphaChannel)
+      overlay.composite(mask, CenterGravity, DstInCompositeOp)
     end
 
   end

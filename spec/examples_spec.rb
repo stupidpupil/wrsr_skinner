@@ -21,7 +21,7 @@ describe WRSRSkinner::Skinnable do
     end
 
     it 'must give the correct signature for covered.dds' do
-      signatures['covered.dds'].should.equal '5a76cfba6be8f5c75bdd029fc8723cf81f5ba1f3feaaba43a114b4b0ef84d254'
+      signatures['covered.dds'].should.equal '3302a079fb8d512d3b4a206da51c4cd6a9aa0a0864fa577127bcf85e0e17da3d'
     end
 
 
@@ -41,7 +41,7 @@ describe WRSRSkinner::Skinnable do
     signatures = textures.map {|k,v| [k, v.signature]}.to_h
 
     it 'must give the correct signature for covered.dds' do
-      signatures['covered.dds'].should.equal '23642dcfdf7e86a5ec847b13a3d48da3619a2a6ed6d9c771d9e4aadbef5b6f2f'
+      signatures['covered.dds'].should.equal 'fe870dc5259c93b317811b7bfe65dbd31f7074a7d017da7d7c7f01b3dc218c14'
     end
 
   end
