@@ -1,5 +1,6 @@
 require 'RMagick'
 require 'YAML'
+require 'digest'
 
 class TextureWrapper
 
@@ -82,7 +83,40 @@ class TextureWrapper
 
   end
 
+  def modulated_texture_cache_key
+    Digest::SHA1.hexdigest(self.texture_path + self.modulate_regions.to_s)
+  end
+
+  def cache_file_ext
+    ".mpc"
+  end
+
+  def modulated_texture_cache_path
+    "./cache/mod_" + self.modulated_texture_cache_key + self.cache_file_ext
+  end
+
+  def texture_dimensions
+
+    cache_path = self.modulated_texture_cache_path
+
+    if File.file?(cache_path)
+      texture = Image.read(cache_path).first
+    else
+      texture = Image.read(self.texture_path).first
+    end
+
+    {columns: texture.columns, rows: texture.rows}
+  end
+
   def modulated_texture
+
+    cache_path = self.modulated_texture_cache_path
+
+    if File.file?(cache_path)
+      texture = Image.read(cache_path).first
+      texture.colorspace = RGBColorspace
+      return(texture)
+    end
 
     texture = Image.read(self.texture_path).first
     texture.colorspace = RGBColorspace
@@ -119,17 +153,16 @@ class TextureWrapper
       texture.composite!(mod_texture, CenterGravity, OverCompositeOp)
     end
 
+    texture.write(cache_path)
     return(texture)
   end
 
-  def texture_with_brand(brand)
+  def overlay_with_brand(brand)
     brand_logo_image = brand.logo_image
 
-    texture = self.modulated_texture
+    dimensions = self.texture_dimensions
 
-    orig_texture = nil
-
-    overlay = Image.new(texture.columns, texture.rows) { |img|
+    overlay = Image.new(dimensions[:columns], dimensions[:rows]) { |img|
       img.depth=16; img.colorspace = RGBColorspace; img.background_color='transparent'}
     overlay.alpha(ActivateAlphaChannel)
 
@@ -247,6 +280,14 @@ class TextureWrapper
         overlay.composite!(lg, CenterGravity, lr_centre_x, lr_centre_y, OverCompositeOp)
       end
     end
+
+    return(overlay)
+  end
+
+  def texture_with_brand(brand)
+
+    texture = self.modulated_texture
+    overlay = self.overlay_with_brand(brand)
 
     overlay.composite!(texture, CenterGravity, DstInCompositeOp)
     texture.composite!(overlay, CenterGravity, OverlayCompositeOp)
