@@ -1,4 +1,5 @@
 **.png
+!spec/reference/*/*.png
 **.dds
 **.nmf
 **.bin
