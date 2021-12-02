@@ -14,14 +14,13 @@ describe WRSRSkinner::Skinnable do
     ifa_w50_covered = WRSRSkinner::Skinnable.new("covered_ifa_w50")
 
     textures = ifa_w50_covered.textures_with_brand(fox_brand)
-    signatures = textures.map {|k,v| [k, v.signature]}.to_h
 
-    it 'must give the correct signature for base.dds' do
-      signatures['base.dds'].should.equal '80497bf87cd366f591a9a56f3ec2ee279ce4f3945ec1de7415e7110b93d452f3'
+    it 'must match the reference image for base.dds' do
+      textures['base.dds'].should.be same_image_as 'spec/reference/fox-covered_ifa_w50/base.dds.png'
     end
 
-    it 'must give the correct signature for covered.dds' do
-      signatures['covered.dds'].should.equal '3302a079fb8d512d3b4a206da51c4cd6a9aa0a0864fa577127bcf85e0e17da3d'
+    it 'must match the reference image for covered.dds' do
+      textures['covered.dds'].should.be same_image_as 'spec/reference/fox-covered_ifa_w50/covered.dds.png'
     end
 
 
@@ -38,10 +37,9 @@ describe WRSRSkinner::Skinnable do
     covered_skd_706rttn = WRSRSkinner::Skinnable.new("covered_skd_706rttn")
 
     textures = covered_skd_706rttn.textures_with_brand(brown_textile_brand)
-    signatures = textures.map {|k,v| [k, v.signature]}.to_h
 
-    it 'must give the correct signature for covered.dds' do
-      signatures['covered.dds'].should.equal 'fe870dc5259c93b317811b7bfe65dbd31f7074a7d017da7d7c7f01b3dc218c14'
+    it 'must match the reference image for covered.dds' do
+      textures['covered.dds'].should.be same_image_as 'spec/reference/textile_brown-covered_skd_706rttn/covered.dds.png'
     end
 
   end
