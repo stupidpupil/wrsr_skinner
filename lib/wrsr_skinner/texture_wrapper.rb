@@ -204,6 +204,9 @@ module WRSRSkinner
           region.draw(color_overlay)
 
           if crs[:mask]
+            # BUG: This will mask out any color region of the same layer+color
+            # This isn't likely to matter much in practice, and is probably
+            # quite easy to workaround anyway
             supplied_mask = Image.read(self.skinnable_dir + "/" + crs[:mask]).first
             supplied_mask.alpha(ActivateAlphaChannel)
             color_overlay.composite!(supplied_mask, CenterGravity, DstOutCompositeOp)
