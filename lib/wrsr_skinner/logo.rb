@@ -7,11 +7,14 @@ module WRSRSkinner
     attr_reader :logo_name
 
     def initialize(logo_name)
+      raise "Invalid logo name" unless logo_name =~ /\A[a-z]+\Z/
       @logo_name = logo_name
     end
 
+    BaseDir = __dir__ + "/../../data-raw/logos/"
+
     def logo_path
-      "data-raw/logos/#{self.logo_name}.png"
+      BaseDir + "/" + self.logo_name + ".png"
     end
 
     def logo_mask
