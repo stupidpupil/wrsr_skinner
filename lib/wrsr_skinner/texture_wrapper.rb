@@ -261,7 +261,7 @@ module WRSRSkinner
           lg = brand_logo_image.copy
 
           if lr[:worn] then
-            worn_mask = Image.read("data-raw/worn_logo_mask.png").first
+            worn_mask = Image.read(__dir__ + "/../../data-raw/worn_logo_mask.png").first
             worn_mask.resize!(brand_logo_image.columns, brand_logo_image.rows)
             worn_mask.alpha(ActivateAlphaChannel)
             worn_mask.fuzz = 50000
