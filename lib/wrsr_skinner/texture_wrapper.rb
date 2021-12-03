@@ -179,7 +179,7 @@ module WRSRSkinner
 
       col_reg.group_by {|cr| cr[:color]}.each do |color_i, crs_for_color|
 
-        region_color = brand.colors[crs_for_color[0][:layer].to_sym]
+        region_color = brand.colors[crs_for_color[0][:layer]]
 
         color_overlay = Image.new(overlay.columns, overlay.rows) { |img|
           img.depth=16; img.colorspace = RGBColorspace; img.background_color='transparent'}
