@@ -2,18 +2,21 @@ module WRSRSkinner
 
   class Skinnable
 
+    BaseDir = __dir__ + "/../../data-raw/skinnable/"
+    OutputDir = __dir__ + "/../../output/"
+
     def self.all
-      Dir.glob("*", base:"data-raw/skinnable/").map{|wrsr_path| Skinnable.new(wrsr_path)}
+      Dir.glob("*", base:BaseDir).map{|wrsr_path| Skinnable.new(wrsr_path)}
     end
 
     attr_reader :skinnable_wrsr_path, :skinnable_dir, :skinnable_entry, :skin_dir
 
     def initialize(skinnable_wrsr_path)
       @skinnable_wrsr_path = skinnable_wrsr_path #e.g. 'covered_ifa_w50'
-      @skinnable_dir = "data-raw/skinnable/" + skinnable_wrsr_path
+      @skinnable_dir = BaseDir + skinnable_wrsr_path
       @skinnable_entry = YAML.load_file(@skinnable_dir + "/skinner.yml")
 
-      @skin_dir = "output/" + self.skinnable_wrsr_path
+      @skin_dir = OutputDir + self.skinnable_wrsr_path
       FileUtils.mkdir_p(@skin_dir)
     end
 

@@ -17,7 +17,7 @@ module WRSRSkinner
 
     def initialize(skinnable_dir, texture_name)
       @skinnable_dir = skinnable_dir
-      @texture_path = skinnable_dir + "/" + texture_name
+      @texture_path = File.expand_path(skinnable_dir + "/" + texture_name)
       @texture_entry = YAML.load_file(skinnable_dir + "/skinner.yml")['textures'][texture_name]
     end
 
@@ -98,8 +98,10 @@ module WRSRSkinner
       ".mpc"
     end
 
+    CacheDir = __dir__ + "/../../cache/"
+
     def modulated_texture_cache_path
-      "./cache/mod_" + self.modulated_texture_cache_key + self.cache_file_ext
+      CacheDir + "/mod_" + self.modulated_texture_cache_key + self.cache_file_ext
     end
 
     def texture_dimensions
