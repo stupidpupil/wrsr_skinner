@@ -20,17 +20,20 @@ module WRSRSkinner
       FileUtils.mkdir_p(@skin_dir)
     end
 
-    def textures_with_brand(br)
+    def texture_wrappers
       return {} if self.skinnable_entry['textures'].nil?
 
       ret = {}
 
       self.skinnable_entry['textures'].keys.each do |tn|
-        tw = TextureWrapper.new(self.skinnable_dir, tn)
-        ret[tn] = tw.texture_with_brand(br)
+        ret[tn] = TextureWrapper.new(self.skinnable_dir, tn)
       end
 
-      return(ret)
+      return ret
+    end
+
+    def textures_with_brand(br)
+      self.texture_wrappers.map {|k,v| [k,v.texture_with_brand(br)]}.to_h
     end
 
     def save_textures_with_brand(br)
