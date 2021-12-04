@@ -3,7 +3,7 @@
 $SUBMATERIAL back
 
 
-$TEXTURE 0 vehicles/oil_t138/back.dds
+$TEXTURE_MTL 0 back.dds
 $TEXTURE 1 blankspecular.dds
 $TEXTURE 2 blankbump.dds
 
@@ -16,7 +16,7 @@ $SPECULARPOWER 2
 $SUBMATERIAL base
 
 
-$TEXTURE 0 vehicles/oil_t138/base.dds
+$TEXTURE_MTL 0 ../oil_t138/base.dds
 $TEXTURE 1 blankspecular.dds
 $TEXTURE 2 blankbump.dds
 

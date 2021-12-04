@@ -3,7 +3,7 @@
 $SUBMATERIAL Base
 
 
-$TEXTURE 0 vehicles/covered_ifa_w50/base.dds
+$TEXTURE_MTL 0 ../covered_ifa_w50/base.dds
 $TEXTURE 1 blankspecular.dds
 $TEXTURE 2 blankbump.dds
 
@@ -15,7 +15,7 @@ $SPECULARPOWER 2
 $SUBMATERIAL Cistern
 
 
-$TEXTURE 0 vehicles/oil_ifa_w50/cistern.dds
+$TEXTURE_MTL 0 cistern.dds
 $TEXTURE 1 blankspecular.dds
 $TEXTURE 2 blankbump.dds
 

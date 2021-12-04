@@ -46,6 +46,10 @@ module WRSRSkinner
         }
         txtr.write(@skin_dir + "/" + tn + ".png")
       end
+
+      if File.file? @skinnable_dir + '/material.mtl'
+        FileUtils.cp @skinnable_dir + '/material.mtl', @skin_dir + '/material.mtl'
+      end
     end
 
     def save_material()

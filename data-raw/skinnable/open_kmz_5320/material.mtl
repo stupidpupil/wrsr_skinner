@@ -3,7 +3,7 @@
 $SUBMATERIAL base
 
 
-$TEXTURE 0 vehicles/open_kmz_5320/base.dds
+$TEXTURE_MTL 0 base.dds
 $TEXTURE 1 blankspecular.dds
 $TEXTURE 2 blankbump.dds
 

@@ -3,7 +3,7 @@
 $SUBMATERIAL Default
 
 
-$TEXTURE 0 vehicles/covered_ifa_w50/base.dds
+$TEXTURE_MTL 0 ../covered_ifa_w50/base.dds
 $TEXTURE 1 blankspecular.dds
 $TEXTURE 2 blankbump.dds
 
@@ -15,7 +15,7 @@ $SPECULARPOWER 2
 $SUBMATERIAL Covered
 
 
-$TEXTURE 0 vehicles/covered_ifa_w50_trail/covered.dds
+$TEXTURE_MTL 0 ../covered_ifa_w50_trail/covered.dds
 $TEXTURE 1 blankspecular.dds
 $TEXTURE 2 blankbump.dds
 
