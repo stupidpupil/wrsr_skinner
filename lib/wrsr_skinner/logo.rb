@@ -2,16 +2,19 @@
 module WRSRSkinner
   class Logo
 
+    BaseDir = __dir__ + "/../../data-raw/logos/"
+
+    def self.valid_logo_names
+      Dir[BaseDir + "/*.png"].map {|f| File.basename(f, ".png")}
+    end
+
     include Magick
 
     attr_reader :logo_name
 
-    BaseDir = __dir__ + "/../../data-raw/logos/"
-
     def initialize(logo_name)
-      raise "Invalid logo name" unless logo_name =~ /\A[a-z]+\Z/
+      raise "Invalid logo name #{logo_name}" unless self.class.valid_logo_names.include? logo_name
       @logo_name = logo_name
-      raise "Logo doesn't exist #{logo_path}" unless File.file? logo_path
     end
 
     def logo_path
