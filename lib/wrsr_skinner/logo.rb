@@ -6,13 +6,13 @@ module WRSRSkinner
 
     attr_reader :logo_name
 
+    BaseDir = __dir__ + "/../../data-raw/logos/"
+
     def initialize(logo_name)
       raise "Invalid logo name" unless logo_name =~ /\A[a-z]+\Z/
       @logo_name = logo_name
-      raise "Logo doesn't exist" unless File.file? self.logo_path
+      raise "Logo doesn't exist #{logo_path}" unless File.file? logo_path
     end
-
-    BaseDir = __dir__ + "/../../data-raw/logos/"
 
     def logo_path
       BaseDir + "/" + self.logo_name + ".png"

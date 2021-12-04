@@ -7,9 +7,9 @@ describe WRSRSkinner::Skinnable do
       wooden_hull_base:'#3a4f4f', 
       logo:"rgb(180, 30, 0)", 
       base:"rgb(95%, 95%, 95%)", 
-      stripe:"rgb(120, 140, 80)"}, 
-      "fox"
-      )
+      stripe:"rgb(120, 140, 80)",
+      logo_name: "fox"
+      })
 
     ifa_w50_covered = WRSRSkinner::Skinnable.new("covered_ifa_w50")
 
@@ -31,8 +31,9 @@ describe WRSRSkinner::Skinnable do
     brown_textile_brand = WRSRSkinner::Brand.new({
       base: "hsb(32, 74%, 70%)", 
       logo: "rgb(85%, 85%, 85%)",
-      wooden_hull_base: "hsb(32, 40%, 60%)"
-    }, "textind")
+      wooden_hull_base: "hsb(32, 40%, 60%)",
+      logo_name: "textind"
+    })
 
     covered_skd_706rttn = WRSRSkinner::Skinnable.new("covered_skd_706rttn")
 
