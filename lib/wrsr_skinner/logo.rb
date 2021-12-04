@@ -9,6 +9,7 @@ module WRSRSkinner
     def initialize(logo_name)
       raise "Invalid logo name" unless logo_name =~ /\A[a-z]+\Z/
       @logo_name = logo_name
+      raise "Logo doesn't exist" unless File.file? self.logo_path
     end
 
     BaseDir = __dir__ + "/../../data-raw/logos/"
