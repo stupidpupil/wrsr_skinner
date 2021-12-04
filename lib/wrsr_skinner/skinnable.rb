@@ -3,20 +3,20 @@ module WRSRSkinner
   class Skinnable
 
     BaseDir = __dir__ + "/../../data-raw/skinnable/"
-    OutputDir = __dir__ + "/../../output/"
+    DefaultOutputDirBase = __dir__ + "/../../output/"
 
-    def self.all
-      Dir.glob("*", base:BaseDir).map{|wrsr_path| Skinnable.new(wrsr_path)}
+    def self.all(output_dir_base = DefaultOutputDirBase)
+      Dir.glob("*", base:BaseDir).map{|wrsr_path| Skinnable.new(wrsr_path, output_dir_base)}
     end
 
     attr_reader :skinnable_wrsr_path, :skinnable_dir, :skinnable_entry, :skin_dir
 
-    def initialize(skinnable_wrsr_path)
+    def initialize(skinnable_wrsr_path, output_dir_base = DefaultOutputDirBase)
       @skinnable_wrsr_path = skinnable_wrsr_path #e.g. 'covered_ifa_w50'
       @skinnable_dir = BaseDir + skinnable_wrsr_path
       @skinnable_entry = YAML.load_file(@skinnable_dir + "/skinner.yml")
 
-      @skin_dir = OutputDir + self.skinnable_wrsr_path
+      @skin_dir = output_dir_base + '/' + self.skinnable_wrsr_path
       FileUtils.mkdir_p(@skin_dir)
     end
 
@@ -37,6 +37,8 @@ module WRSRSkinner
     end
 
     def save_textures_with_brand(br)
+      FileUtils.mkdir_p @skin_dir
+
       self.textures_with_brand(br).each_pair do |tn, txtr|
         txtr.write("DDS:" + @skin_dir + "/" + tn) { |img|
           img.define("dds", "compression", "dxt1")
