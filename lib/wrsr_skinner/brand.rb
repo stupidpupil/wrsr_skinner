@@ -8,7 +8,11 @@ module WRSRSkinner
 
     def initialize(colors={})
       @colors = colors.map{|k,v| [k.to_s, v]}.to_h
-      @logo = @colors['logo_name'].nil? ? nil : Logo.new(@colors['logo_name'])
+      if @colors['logo_name'].nil? or @colors['logo_name'] == "" then
+        @logo = nil
+      else 
+        @logo = Logo.new(@colors['logo_name'])
+      end
     end
 
     def logo_image
