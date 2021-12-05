@@ -70,7 +70,8 @@ module WRSRSkinner
         rotate: 0,
         worn: false,
         barrier: true,
-        flip_x: false
+        flip_x: false,
+        layer: 'logo'
       }
 
       if self.texture_entry['logo_regions'].is_a? Array then
@@ -85,6 +86,7 @@ module WRSRSkinner
           barrier: v&.[]('barrier'),
           mask: v&.[]('mask'),
           flip_x: v&.[]('flip_x'),
+          layer: v&.[]('layer')
         }.compact)
       }
 
@@ -166,7 +168,13 @@ module WRSRSkinner
     end
 
     def overlay_with_brand(brand)
-      brand_logo_image = brand.logo_image
+
+      logo_regions_with_brand = self.logo_regions
+      logo_regions_with_brand.each do |lr|
+        lr[:color] = brand.colors[lr[:layer]]
+      end
+
+      logo_regions_with_brand.delete_if {|lr| lr[:color].nil? or lr[:color] == 'transparent'}
 
       dimensions = self.texture_dimensions
 
@@ -217,14 +225,14 @@ module WRSRSkinner
         end
 
         # For anything other than a base colour, we punch out logo barriers
-        if not (crs_for_color[0][:layer] =~ /(^|_)base(_|$)/) and not brand_logo_image.nil? then
+        if not (crs_for_color[0][:layer] =~ /(^|_)base(_|$)/) then
 
           barrier_overlay = Image.new(overlay.columns, overlay.rows) { |img|
             img.depth=16; img.colorspace = RGBColorspace; img.background_color='transparent'}
 
           barrier_overlay.alpha(ActivateAlphaChannel)
 
-          self.logo_regions.each do |lr|
+          logo_regions_with_brand.each do |lr|
             next if not lr[:barrier]
             
             region_points = lr[:geometry].split(",").map {|e| eval(e).to_i}
@@ -236,7 +244,7 @@ module WRSRSkinner
             lr_centre_y = region_points[1] + (lr_height/2).to_i
 
             # TODO Fix the inefficiency of actually doing this twice
-            lg = brand_logo_image.rotate(lr[:rotate]).resize_to_fit(lr_width, lr_height) 
+            lg = brand.logo.logo_mask.rotate(lr[:rotate]).resize_to_fit(lr_width, lr_height) 
 
             region = Magick::Draw.new
             
@@ -255,44 +263,42 @@ module WRSRSkinner
         overlay.composite!(color_overlay, CenterGravity, OverCompositeOp)
       end
 
-      if not brand_logo_image.nil?
-        self.logo_regions.each do |lr|
+      logo_regions_with_brand.each do |lr|
 
-          lg = brand_logo_image.copy
+        lg = brand.logo.logo_with_color(lr[:color])
 
-          if lr[:worn] then
-            worn_mask = Image.read(__dir__ + "/../../data-raw/worn_logo_mask.png").first
-            worn_mask.resize!(brand_logo_image.columns, brand_logo_image.rows)
-            worn_mask.alpha(ActivateAlphaChannel)
-            worn_mask.fuzz = 50000
-            worn_mask = worn_mask.transparent('black')
+        if lr[:worn] then
+          worn_mask = Image.read(__dir__ + "/../../data-raw/worn_logo_mask.png").first
+          worn_mask.resize!(lg.columns, lg.rows)
+          worn_mask.alpha(ActivateAlphaChannel)
+          worn_mask.fuzz = 50000
+          worn_mask = worn_mask.transparent('black')
 
-            lg.composite!(worn_mask, CenterGravity, DstInCompositeOp).modulate(0.8, 0.8, 1.0)
-          end
-
-          if lr[:flip_x] then
-            lg.flop!
-          end
-
-          # Resize logo
-
-          region_points = lr[:geometry].split(",").map {|e| eval(e).to_i}
-
-          lr_width = region_points[2] - region_points[0]
-          lr_height = region_points[3] - region_points[1]
-
-          lg.rotate!(lr[:rotate]).resize_to_fit!(lr_width, lr_height)
-
-          # Find centre of logo region
-          lr_centre_x = region_points[0] + (lr_width/2).to_i
-          lr_centre_y = region_points[1] + (lr_height/2).to_i
-
-          # Adjust for CenterGravity
-          lr_centre_x = lr_centre_x - (overlay.columns/2).to_i
-          lr_centre_y = lr_centre_y - (overlay.rows/2).to_i
-
-          overlay.composite!(lg, CenterGravity, lr_centre_x, lr_centre_y, OverCompositeOp)
+          lg.composite!(worn_mask, CenterGravity, DstInCompositeOp).modulate(0.8, 0.8, 1.0)
         end
+
+        if lr[:flip_x] then
+          lg.flop!
+        end
+
+        # Resize logo
+
+        region_points = lr[:geometry].split(",").map {|e| eval(e).to_i}
+
+        lr_width = region_points[2] - region_points[0]
+        lr_height = region_points[3] - region_points[1]
+
+        lg.rotate!(lr[:rotate]).resize_to_fit!(lr_width, lr_height)
+
+        # Find centre of logo region
+        lr_centre_x = region_points[0] + (lr_width/2).to_i
+        lr_centre_y = region_points[1] + (lr_height/2).to_i
+
+        # Adjust for CenterGravity
+        lr_centre_x = lr_centre_x - (overlay.columns/2).to_i
+        lr_centre_y = lr_centre_y - (overlay.rows/2).to_i
+
+        overlay.composite!(lg, CenterGravity, lr_centre_x, lr_centre_y, OverCompositeOp)
       end
 
       return(overlay)
