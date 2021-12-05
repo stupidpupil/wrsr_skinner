@@ -15,7 +15,18 @@ textures:
         layer: cab_stripe_base
         mask: base_mask.png
 
+      559,113, 565,113+70, 559,113+70:
+        layer: cab_stripe_base
+        mask: base_mask.png
 
       0,366, 336,366+82:
         layer: cab_stripe_base
         mask: base_mask.png
+
+    logo_regions:
+      70,113+5, 70+70,113+70-5:
+        layer: cab_stripe_logo
+
+      370+70,113+5, 370+70+65,113+70-5:
+        layer: cab_stripe_logo
+        flip_x: true

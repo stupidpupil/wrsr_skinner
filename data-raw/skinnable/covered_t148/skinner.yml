@@ -16,3 +16,8 @@ textures:
         mask: base_bonnet_mask.png
         comment: bonnet (like cab stripe)
         layer: cab_stripe_base
+
+    logo_regions:
+      336+55,330+80, 730-80,649-120:
+        layer: cab_stripe_logo
+        rotate: 180

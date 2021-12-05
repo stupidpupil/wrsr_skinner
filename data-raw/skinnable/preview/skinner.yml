@@ -31,3 +31,6 @@ textures:
 
     logo_regions:
       325,180, 900,320:
+      195,330, 275,380:
+        layer: cab_stripe_logo
+

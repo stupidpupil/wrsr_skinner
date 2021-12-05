@@ -18,6 +18,10 @@ textures:
         comment: bonnet (like cab stripe)
         layer: cab_stripe_base
 
+    logo_regions:
+      50,448, 342,545:
+        layer: cab_stripe_logo
+
   back.dds:
     modulate_regions:
       0,0, 1024,1024:

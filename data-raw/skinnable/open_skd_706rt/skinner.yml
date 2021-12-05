@@ -55,6 +55,14 @@ textures:
         comment: cab stripe
         layer: cab_stripe_base
 
+    logo_regions:
+      40,700, 20+90,700+64:
+        layer: cab_stripe_logo
+
+      872+40,700+8, 872+20+90,700+8+64:
+        layer: cab_stripe_logo
+        flip_x: true
+
   open.dds:
     modulate_regions:
       0,0, 734,178:
