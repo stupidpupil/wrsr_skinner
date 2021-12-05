@@ -14,6 +14,15 @@ textures:
         brightness: 0.6
         saturation: 0.3
 
+      0,0 ,432,851:
+        mask: chasis_mask.png
+        saturation: 0
+        brightness: 0.8
+
+      705,570, 1024,875:
+        mask: chasis_mask.png
+        saturation: 0
+        brightness: 0.8
 
     color_regions:
       0,0 ,432,851:
