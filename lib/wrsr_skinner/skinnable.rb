@@ -17,7 +17,6 @@ module WRSRSkinner
       @skinnable_entry = YAML.load_file(@skinnable_dir + "/skinner.yml")
 
       @skin_dir = output_dir_base + '/' + self.skinnable_wrsr_path
-      FileUtils.mkdir_p(@skin_dir)
     end
 
     def include_in_bundle?
@@ -57,8 +56,8 @@ module WRSRSkinner
     end
 
     def save_material()
+      FileUtils.mkdir_p(@skin_dir)
       input = File.read(@skinnable_wrsr_path + 'material.mtl')
-
     end
 
   end
