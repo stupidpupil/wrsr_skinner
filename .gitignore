@@ -1,6 +1,8 @@
 **.png
+!data-raw/skinnable/*/*_mask.png
 !spec/reference/*/*.png
 **.dds
 **.nmf
 **.bin
 **.ini
+**~
