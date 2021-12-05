@@ -20,6 +20,10 @@ module WRSRSkinner
       FileUtils.mkdir_p(@skin_dir)
     end
 
+    def include_in_bundle?
+      skinnable_entry['include_in_bundle'].nil? ? true : skinnable_entry['include_in_bundle']
+    end
+
     def texture_wrappers
       return {} if self.skinnable_entry['textures'].nil?
 
