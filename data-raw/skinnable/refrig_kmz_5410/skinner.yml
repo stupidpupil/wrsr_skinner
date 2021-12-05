@@ -1,8 +1,19 @@
 textures:
   refrig.dds:
     modulate_regions:
-      0,0, 1024,1024:
-        brightness: 0.9
+      0,0, 2048,2048:
+        brightness: 0.6
+        saturation: 0
+        mask: refrig_mask.png
+
+      0,540, 2048,540+540:
+        brightness: 0.6
+        saturation: 0
+        mask: refrig_mask.png
+
+      0,540+540+1, 2048,540+540+480:
+        brightness: 0.6
+        saturation: 0
         mask: refrig_mask.png
 
     color_regions:
