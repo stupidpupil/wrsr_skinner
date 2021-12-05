@@ -1,0 +1,25 @@
+textures:
+  ifa_w_50.png:
+    color_regions:
+      325,120, 900,350:
+      1078,140, 1365,350:
+      1078,140, 1225,125, 1365,140:
+
+      325,270, 900,295:
+        layer: stripe
+
+      1078,270, 1365,295:
+        layer: stripe
+
+      1078,270, 1365,295:
+        layer: stripe
+
+      100,200, 325,450:
+        layer: cab_base
+
+      100,325, 325,385:
+        layer: cab_stripe_base
+
+
+    logo_regions:
+      325,180, 900,320:
