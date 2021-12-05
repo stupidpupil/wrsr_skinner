@@ -3,9 +3,11 @@ textures:
     modulate_regions:
       0,0, 780,270:
         saturation: 0
+        brightness: 2
 
       0,319, 897,1024:
         saturation: 0
+        brightness: 0.85
 
     color_regions:
       0,0, 780,270:
