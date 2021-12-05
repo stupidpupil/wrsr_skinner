@@ -5,6 +5,12 @@ textures:
       1078,140, 1365,350:
       1078,140, 1225,125, 1365,140:
 
+      325,351, 905,395:
+        layer: wooden_hull_base
+
+      1078,351, 1363,395:
+        layer: wooden_hull_base
+
       325,270, 900,295:
         layer: stripe
 
@@ -19,7 +25,6 @@ textures:
 
       100,325, 325,385:
         layer: cab_stripe_base
-
 
     logo_regions:
       325,180, 900,320:
