@@ -1,5 +1,6 @@
 **.png
 !data-raw/skinnable/*/*_mask.png
+!data-raw/logos/*.png
 !spec/reference/*/*.png
 **.dds
 **.nmf
