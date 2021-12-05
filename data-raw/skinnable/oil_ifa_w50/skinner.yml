@@ -1,4 +1,3 @@
-include_in_bundle: false
 textures:
   cistern.dds:
     modulate_regions:
