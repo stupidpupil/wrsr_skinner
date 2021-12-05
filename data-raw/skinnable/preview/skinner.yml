@@ -22,9 +22,11 @@ textures:
 
       100,200, 325,450:
         layer: cab_base
+        mask: ifa_w_50_mask.png
 
       100,325, 325,385:
         layer: cab_stripe_base
+        mask: ifa_w_50_mask.png
 
     logo_regions:
       325,180, 900,320:
