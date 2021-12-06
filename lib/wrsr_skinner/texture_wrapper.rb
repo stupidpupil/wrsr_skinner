@@ -170,12 +170,16 @@ module WRSRSkinner
 
     def overlay_with_brand(brand)
 
-      logo_regions_with_brand = self.logo_regions
-      logo_regions_with_brand.each do |lr|
-        lr[:color] = brand.colors[lr[:layer]]
-      end
+      if brand.logo.nil?
+        logo_regions_with_brand = []
+      else
+        logo_regions_with_brand = self.logo_regions
+        logo_regions_with_brand.each do |lr|
+          lr[:color] = brand.colors[lr[:layer]]
+        end
 
-      logo_regions_with_brand.delete_if {|lr| lr[:color].nil? or lr[:color] == 'transparent'}
+        logo_regions_with_brand.delete_if {|lr| lr[:color].nil? or lr[:color] == 'transparent'}
+      end
 
       dimensions = self.texture_dimensions
 
