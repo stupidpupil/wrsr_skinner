@@ -3,4 +3,28 @@ textures:
   back.dds:
     modulate_regions:
       0,0, 1024,1024:
-        saturation: 1
+        saturation: 0
+        mask: back_lights_mask.png
+        
+      0,0, 640,625:
+        saturation: 0
+        brightness: 2.3
+        mask: back_mask.png
+
+      0,625, 480,760:
+        saturation: 0
+        brightness: 2.7
+        mask: back_mask.png
+
+    color_regions:
+      0,0, 640,625:
+      0,626, 480,760:
+
+      0,690, 480,690+25:
+        layer: stripe
+
+      0,436, 640,459:
+        layer: stripe
+
+      0,122, 640,122+23:
+        layer: stripe
