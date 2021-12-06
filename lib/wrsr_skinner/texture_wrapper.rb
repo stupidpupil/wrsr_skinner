@@ -72,7 +72,8 @@ module WRSRSkinner
         worn: false,
         barrier: true,
         flip_x: false,
-        layer: 'logo'
+        layer: 'logo',
+        squish: 1.0
       }
 
       if self.texture_entry['logo_regions'].is_a? Array then
@@ -87,7 +88,8 @@ module WRSRSkinner
           barrier: v&.[]('barrier'),
           mask: v&.[]('mask'),
           flip_x: v&.[]('flip_x'),
-          layer: v&.[]('layer')
+          layer: v&.[]('layer'),
+          squish: v&.[]('squish')
         }.compact)
       }
 
@@ -271,6 +273,10 @@ module WRSRSkinner
       logo_regions_with_brand.each do |lr|
 
         lg = brand.logo.logo_with_color(lr[:color])
+
+        if lr[:squish] != 1.0 then
+          lg.resize!(lg.columns*lr[:squish], lg.rows)
+        end
 
         if lr[:worn] then
           worn_mask = Image.read(__dir__ + "/../../data-raw/worn_logo_mask.png").first
