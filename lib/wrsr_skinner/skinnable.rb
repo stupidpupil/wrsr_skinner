@@ -44,7 +44,7 @@ module WRSRSkinner
 
       self.textures_with_brand(br).each_pair do |tn, txtr|
         txtr.write("DDS:" + @skin_dir + "/" + tn) { |img|
-          img.define("dds", "compression", "dxt1")
+          img.define("dds", "compression", "dxt5")
           img.define("dds", "mipmaps", 1)
         }
         txtr.write(@skin_dir + "/" + tn + ".png")
