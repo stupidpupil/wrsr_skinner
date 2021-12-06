@@ -28,9 +28,16 @@ module WRSRSkinner
       ret.colorspace = RGBColorspace
       ret.alpha(ActivateAlphaChannel)
 
-      ret.fuzz = 50000
-      ret = ret.transparent("#FDFAE9")
-      ret = ret.transparent("#FFFFFF")
+      if ret.pixel_color(1,1).red > (0.8*Magick::QuantumRange) then
+       ret.fuzz = 50000
+        ret = ret.transparent("#FDFAE9")
+        ret = ret.transparent("#FFFFFF")
+      else
+        ret.fuzz = 28000
+        ret = ret.transparent("#0778A9")
+        ret = ret.transparent("#0D73A8")
+      end
+
 
       #ret = ret.channel(RedChannel|GreenChannel|BlueChannel).negate().composite(ret, CenterGravity, CopyAlphaCompositeOp)
       ret.alpha(ActivateAlphaChannel)
