@@ -30,6 +30,8 @@ textures:
     logo_regions:
       29,34+20, 29+1013,34+20+425:
         flip_x: true
+        squish: 0.8
 
       29,579+20, 29+1013,579+20+425:
         flip_x: true
+        squish: 0.8
