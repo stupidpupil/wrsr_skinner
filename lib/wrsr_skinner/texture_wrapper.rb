@@ -251,7 +251,13 @@ module WRSRSkinner
             lr_centre_y = region_points[1] + (lr_height/2).to_i
 
             # TODO Fix the inefficiency of actually doing this twice
-            lg = brand.logo.logo_mask.rotate(lr[:rotate]).resize_to_fit(lr_width, lr_height) 
+            lg = brand.logo.logo_mask.copy
+
+            if lr[:squish] != 1.0 then
+              lg.resize!(lg.columns*lr[:squish], lg.rows)
+            end
+
+            lg = lg.rotate(lr[:rotate]).resize_to_fit(lr_width, lr_height) 
 
             region = Magick::Draw.new
             
