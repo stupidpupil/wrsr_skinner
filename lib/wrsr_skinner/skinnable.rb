@@ -14,7 +14,12 @@ module WRSRSkinner
     def initialize(skinnable_wrsr_path, output_dir_base = DefaultOutputDirBase)
       @skinnable_wrsr_path = skinnable_wrsr_path #e.g. 'covered_ifa_w50'
       @skinnable_dir = BaseDir + skinnable_wrsr_path
-      @skinnable_entry = YAML.load_file(@skinnable_dir + "/skinner.yml")
+
+      if File.file?(@skinnable_dir + "/skinner.yml")
+        @skinnable_entry = YAML.load_file(@skinnable_dir + "/skinner.yml")
+      else
+        @skinnable_entry = {}
+      end
 
       @skin_dir = output_dir_base + '/' + self.skinnable_wrsr_path
     end
