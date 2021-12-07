@@ -1,5 +1,5 @@
-require 'RMagick'
-require 'YAML'
+require 'rmagick'
+require 'yaml'
 require 'digest'
 require 'fileutils'
 
