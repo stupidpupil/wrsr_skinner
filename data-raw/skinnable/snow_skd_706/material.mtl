@@ -1,0 +1,28 @@
+
+
+$SUBMATERIAL Skoda_706_RTTN__Chassis_1
+
+
+$TEXTURE_MTL 0 ../open_skd_706rt/chasis.dds
+$TEXTURE 1 blankspecular.dds
+$TEXTURE 2 blankbump.dds
+
+$DIFFUSECOLOR 0.7 0.7  0.7  1 
+$SPECULARCOLOR 1 1 1 1 
+$AMBIENTCOLOR 0.8  0.8  0.8  1 
+$SPECULARPOWER 2
+
+$SUBMATERIAL  pluh_freza_korba:pluh_material
+
+$TEXTURE 0 snowplow.dds
+$TEXTURE 1 blankspecular.dds
+$TEXTURE 2 blankbump.dds
+
+$DIFFUSECOLOR 0.7 0.7  0.7  1 
+$SPECULARCOLOR 1 1 1 1 
+$AMBIENTCOLOR 0.8  0.8  0.8  1 
+$SPECULARPOWER 2
+
+$END
+
+
