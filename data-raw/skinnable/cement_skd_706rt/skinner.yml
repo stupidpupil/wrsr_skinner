@@ -1,0 +1,10 @@
+textures:
+  cement.dds:
+    modulate_regions:
+      0,0, 1024,1024:
+        saturation: 0
+        mask: cement_mask.png
+
+    color_regions:
+      0,0, 1024,1024:
+        mask: cement_mask2.png
