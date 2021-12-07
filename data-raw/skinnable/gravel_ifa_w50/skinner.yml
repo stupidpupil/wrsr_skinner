@@ -1,3 +1,16 @@
-include_in_bundle: false
 textures:
   dumper.dds:
+    modulate_regions:
+      0,0, 1024,1024:
+        mask: dumper_mask.png
+        saturation: 0
+    color_regions:
+      0,413, 420,720:
+        layer: wooden_hull_base
+      372,710, 1024, 1024:
+        layer: wooden_hull_base
+      953,553, 1024, 710:
+        layer: wooden_hull_base
+        
+
+
