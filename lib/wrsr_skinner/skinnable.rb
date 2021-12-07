@@ -24,6 +24,14 @@ module WRSRSkinner
       @skin_dir = output_dir_base + '/' + self.skinnable_wrsr_path
     end
 
+    def family
+      return skinnable_entry['family'] unless skinnable_entry['family'].nil?
+      return self.skinnable_wrsr_path if self.skinnable_wrsr_path.split('_').length < 3
+      return 'kmz' if self.skinnable_wrsr_path.split('_')[1] == 'kmz'
+      ret = self.skinnable_wrsr_path.split('_')[1,2].join('_')
+      ret.gsub(/706(rt(tn)?)?\Z/, "706rt")
+    end
+
     def include_in_bundle?
       skinnable_entry['include_in_bundle'].nil? ? true : skinnable_entry['include_in_bundle']
     end
