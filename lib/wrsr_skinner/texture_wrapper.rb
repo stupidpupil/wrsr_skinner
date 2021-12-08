@@ -14,12 +14,12 @@ module WRSRSkinner
 
     include Magick
 
-    attr_reader :skinnable_dir, :texture_path, :texture_entry
+    attr_reader :skinnable_wrsr_path, :texture_path, :texture_entry
 
-    def initialize(skinnable_dir, texture_name)
-      @skinnable_dir = skinnable_dir
-      @texture_path = File.expand_path(skinnable_dir + "/" + texture_name)
-      @texture_entry = YAML.load_file(skinnable_dir + "/skinner.yml")['textures'][texture_name]
+    def initialize(skinnable_wrsr_path, texture_name)
+      @skinnable_wrsr_path = skinnable_wrsr_path
+      @texture_path = Resolver.instance.resolve(skinnable_wrsr_path + "/" + texture_name)
+      @texture_entry = YAML.load_file(Resolver.instance.resolve(skinnable_wrsr_path + "/skinner.yml"))['textures'][texture_name]
     end
 
     def modulate_regions
@@ -144,7 +144,7 @@ module WRSRSkinner
           img.depth=16; img.colorspace = RGBColorspace; img.background_color='transparent'}
 
         if drs[:mask]
-          supplied_mask = Image.read(self.skinnable_dir + "/" + drs[:mask]).first
+          supplied_mask = Image.read(Resolver.instance.resolve(self.skinnable_wrsr_path + "/" + drs[:mask])).first
           supplied_mask.alpha(ActivateAlphaChannel)
           mod_texture.composite!(supplied_mask, CenterGravity, DstOutCompositeOp)
         end
@@ -224,7 +224,7 @@ module WRSRSkinner
             # BUG: This will mask out any color region of the same layer+color
             # This isn't likely to matter much in practice, and is probably
             # quite easy to workaround anyway
-            supplied_mask = Image.read(self.skinnable_dir + "/" + crs[:mask]).first
+            supplied_mask = Image.read(Resolver.instance.resolve(self.skinnable_wrsr_path + "/" + crs[:mask])).first
             supplied_mask.alpha(ActivateAlphaChannel)
             color_overlay.composite!(supplied_mask, CenterGravity, DstOutCompositeOp)
           end

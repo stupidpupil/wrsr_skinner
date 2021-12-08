@@ -7,4 +7,4 @@ require 'wrsr_skinner/logo'
 require 'wrsr_skinner/brand'
 require 'wrsr_skinner/skinnable'
 require 'wrsr_skinner/texture_wrapper'
-
+require 'wrsr_skinner/resolver'

@@ -42,7 +42,7 @@ module WRSRSkinner
       ret = {}
 
       self.skinnable_entry['textures'].keys.each do |tn|
-        ret[tn] = TextureWrapper.new(self.skinnable_dir, tn)
+        ret[tn] = TextureWrapper.new(self.skinnable_wrsr_path, tn)
       end
 
       return ret
