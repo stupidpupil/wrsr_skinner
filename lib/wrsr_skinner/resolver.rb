@@ -5,7 +5,11 @@ module WRSRSkinner
   class Resolver
       include Singleton
 
-      DEFAULT_PATHS = [__dir__ + "/../../data-raw/skinnable/"]
+      DEFAULT_PATHS = [
+        __dir__ + "/../../data-raw/skinnable/",
+        '/Program Files (x86)/Steam/steamapps/common/SovietRepublic/media_soviet/vehicles/',
+        '/mnt/c/Program Files (x86)/Steam/steamapps/common/SovietRepublic/media_soviet/vehicles/'
+      ]
 
       def initialize
         @paths = DEFAULT_PATHS
