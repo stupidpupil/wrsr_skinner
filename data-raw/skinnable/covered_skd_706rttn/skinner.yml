@@ -1,5 +1,6 @@
 textures:
   covered.dds:
+    path: '../open_skd_706rttn/covered.dds'
     modulate_regions:
       0,0, 1024,1024:
         saturation: 0

@@ -1,5 +1,6 @@
 textures:
   cement.dds:
+    path: '../open_skd_706rt/cement.dds'
     modulate_regions:
       0,0, 1024,1024:
         saturation: 0

@@ -1,5 +1,6 @@
 textures:
   refrig.dds:
+    path: '../open_kmz_5410/refrig.dds'
     modulate_regions:
       0,0, 2048,2048:
         brightness: 0.6

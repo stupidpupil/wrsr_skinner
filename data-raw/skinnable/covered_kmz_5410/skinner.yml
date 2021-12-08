@@ -1,5 +1,6 @@
 textures:
   covered.dds:
+    path: '../open_kmz_5410/covered.dds'
     modulate_regions:
       0,0, 1024,1024:
         saturation: 0

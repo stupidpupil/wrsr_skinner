@@ -1,0 +1,18 @@
+
+
+$SUBMATERIAL lambert1
+
+
+$TEXTURE_MTL 0 diffuse.dds
+$TEXTURE 1 blankspecular.dds
+$TEXTURE 2 blankbump.dds
+
+$DIFFUSECOLOR 1.0 1.0  1.0  1 
+$SPECULARCOLOR 1 1 1 1 
+$AMBIENTCOLOR 1.0  1.0  1.0  1 
+$SPECULARPOWER 2
+
+
+$END
+
+

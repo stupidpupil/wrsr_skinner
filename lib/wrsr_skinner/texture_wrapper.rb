@@ -18,8 +18,10 @@ module WRSRSkinner
 
     def initialize(skinnable_wrsr_path, texture_name)
       @skinnable_wrsr_path = skinnable_wrsr_path
-      @texture_path = Resolver.instance.resolve(skinnable_wrsr_path + "/" + texture_name)
       @texture_entry = YAML.load_file(Resolver.instance.resolve(skinnable_wrsr_path + "/skinner.yml"))['textures'][texture_name]
+
+      texture_path = @texture_entry&.[]('path') || texture_name
+      @texture_path = Resolver.instance.resolve(skinnable_wrsr_path + "/" + texture_path)
     end
 
     def modulate_regions
