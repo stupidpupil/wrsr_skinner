@@ -9,6 +9,8 @@ module WRSRSkinner
 
       def initialize
         @paths = DEFAULT_PATHS
+
+        ENV['WRSR_RESOLVE_PATHS'].split(';').each {|p| self.add_path(p)}
       end
 
       def add_path(new_path)

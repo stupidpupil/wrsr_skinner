@@ -2,6 +2,7 @@ require 'rmagick'
 require 'yaml'
 require 'digest'
 require 'fileutils'
+require 'dotenv/load'
 
 require 'wrsr_skinner/logo'
 require 'wrsr_skinner/brand'
