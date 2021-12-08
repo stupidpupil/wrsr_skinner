@@ -1,0 +1,27 @@
+Various files, particularly image files, in data-raw/skinnables/ are derivative
+works of textures included with WRSR. 3Division has provided broad permission
+for the creation of such workers from game assets for the purposes of modding.
+
+Various logos in data-raw/logos/ remain the intellectual property of others.
+Some have been taken from the Instagram pages of the Soviet Logos and
+yugo.logos projects; thanks to the curators of those projects for
+collating these.
+
+The following code is licensed under the Affero GPLv3 or later:
+ - the Ruby code in lib/ and spec/
+ - skinner.yml files in data-raw/skinnables/
+
+The Affero GPLv3 copyright notice follows:
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
