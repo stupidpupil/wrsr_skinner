@@ -22,6 +22,11 @@ module WRSRSkinner
 
       texture_path = @texture_entry&.[]('path') || texture_name
       @texture_path = Resolver.instance.resolve(skinnable_wrsr_path + "/" + texture_path)
+
+      if @texture_path.nil?
+        raise "Couldn't find texture #{texture_name} for #{skinnable_wrsr_path}"
+      end
+
     end
 
     def modulate_regions
