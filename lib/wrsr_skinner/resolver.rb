@@ -29,6 +29,7 @@ module WRSRSkinner
           return target_path if File.file? target_path
         end
 
+        puts "Could not resolve #{target}"
         return nil
       end
 
