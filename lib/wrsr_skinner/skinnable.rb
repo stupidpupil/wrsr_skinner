@@ -32,6 +32,13 @@ module WRSRSkinner
       ret.gsub(/706(rt(tn)?)?\Z/, "706rt")
     end
 
+    def depends_on
+      return [] if not File.file? @skinnable_dir + '/material.mtl'
+      File.readlines(@skinnable_dir + '/material.mtl').
+        map { |l| l.match(/\A\$TEXTURE_MTL \d \.\.\/(.+?)\/.+\Z/)&.[](1)}.
+        compact.uniq
+    end
+
     def include_in_bundle?
       skinnable_entry['include_in_bundle'].nil? ? true : skinnable_entry['include_in_bundle']
     end
