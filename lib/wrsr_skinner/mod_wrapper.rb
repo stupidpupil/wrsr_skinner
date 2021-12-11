@@ -38,6 +38,25 @@ module WRSRSkinner
       @steam_owner_id = steam_owner_id
     end
 
+    def workshopconfig_as_s
+      ret = ""
+
+      ret << "$ITEM_ID #{@mod_id}\n\n"
+      ret << "$OWNER_ID #{@steam_owner_id}\n\n"
+      ret << "$ITEM_TYPE WORKSHOP_ITEMTYPE_VEHICLESKIN\n\n"
+      ret << "$VISIBILITY 0\n\n"
+      ret << "$ITEM_NAME \"WRSRSkinner generated mod\"\n\n"
+      ret << "$ITEM_DESC \"WRSRSkinner generated mod\"\n\n"
+
+      @requested_skinnable_ids.each do |skid|
+        ret << "$TARGET_OBJECT_SKIN #{skid} #{skid}/material.mtl\n\n"
+      end
+
+      ret << "$END\n"
+
+      return ret
+    end
+
     def zip_io
 
       zip_io = StringIO.new
@@ -50,6 +69,8 @@ module WRSRSkinner
         else
           skinnables.each {|s| s.save_textures_with_brand(@brand)}
         end
+
+        File.open(temp_dir + "/workshopconfig", "w") { |f| f.puts self.workshopconfig_as_s }
 
         files_to_be_zipped = Dir[ File.join( temp_dir, "**", "**" ) ]
 
