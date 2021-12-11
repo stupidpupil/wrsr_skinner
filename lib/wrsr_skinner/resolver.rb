@@ -15,7 +15,7 @@ module WRSRSkinner
         @paths = DEFAULT_PATHS
 
         if ENV['WRSR_RESOLVE_PATHS'] then
-	  ENV['WRSR_RESOLVE_PATHS'].split(';').each {|p| self.add_path(p)}
+          ENV['WRSR_RESOLVE_PATHS'].split(';').each {|p| self.add_path(p)}
         end
       end
 
