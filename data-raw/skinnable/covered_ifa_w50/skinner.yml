@@ -1,6 +1,13 @@
 textures:
   base.dds:
     modulate_regions:
+      0,1562, 490,1554, 683,1526, 887,1551, 1223,1537, 1370,1556, 1372,1765, 1331,1846, 1248,1839, 1242,1787, 1213,1782, 1157,1840, 1077,1839, 625,1791, 0,1792:
+        saturation: 0
+        brightness: 0.65
+        mask: base_mask.png
+
+
+
       0,1817, 618,1786, 937,1816, 1234,1883, 1318,1973, 1441,1973, 1441,2048, 0,2048:
         saturation: 0
         brightness: 1.05
@@ -8,15 +15,28 @@ textures:
 
 
     color_regions:
-      0,1753 ,1446,1753+295:
+      0,1530 ,1446,1753+2048:
         mask: base_mask.png
         layer: cab_base
+
+      0,1660 ,1081,1660+64:
+        mask: base_mask.png
+        layer: cab_stripe_base
 
       0,1920 ,949,1920+64:
         mask: base_mask.png
         layer: cab_stripe_base
 
     logo_regions:
+
+      413,1662, 413+60,1662+56:
+        layer: cab_stripe_logo
+        flip_x: true
+
+      483+345+68,1662, 483+345+68+60,1662+56:
+        layer: cab_stripe_logo
+
+
       345,1922, 345+60,1922+56:
         layer: cab_stripe_logo
         flip_x: true
