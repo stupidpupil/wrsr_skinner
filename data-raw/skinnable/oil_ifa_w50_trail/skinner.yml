@@ -1,0 +1,26 @@
+textures:
+  cistern.dds:
+    modulate_regions:
+      0,0, 400,1024:
+        brightness: 0.8
+
+    color_regions:
+      0,0, 400,1024:
+        mask: cistern_mask.png
+
+      0,596, 0+241, 596+17:
+        mask: cistern_mask.png
+        layer: stripe
+        comment: tank front and rear
+
+      75,0, 75+13, 0+541:
+        mask: cistern_mask.png
+        layer: stripe
+
+      242,0, 242+13, 0+541:
+        mask: cistern_mask.png
+        layer: stripe
+
+    logo_regions:
+      25,580, 25+75, 580+54:
+      145,580, 145+75, 580+54:
