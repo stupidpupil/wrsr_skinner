@@ -26,8 +26,9 @@ module WRSRSkinner
 
     def family
       return skinnable_entry['family'] unless skinnable_entry['family'].nil?
-      return self.skinnable_wrsr_path if self.skinnable_wrsr_path.split('_').length < 3
-      return 'kmz' if self.skinnable_wrsr_path.split('_')[1] == 'kmz'
+      path_parts = skinnable_wrsr_path.split('_')
+      return self.skinnable_wrsr_path if path_parts.length < 3
+      return 'kmz_5320_5410' if path_parts[1] == 'kmz' and ['5320', '5410'].include? path_parts[2]
       ret = self.skinnable_wrsr_path.split('_')[1,2].join('_')
       ret.gsub(/706(rt(tn)?)?\Z/, "706rt")
     end
