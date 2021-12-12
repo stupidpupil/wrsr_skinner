@@ -21,7 +21,7 @@ module WRSRSkinner
     BundleMaxFileCount = 200
     BundleMaxSizeBytes = 100*1024*1024
 
-    def initialize(requested_skinnable_ids, brand, mod_id = nil, steam_owner_id = nil)
+    def initialize(requested_skinnable_ids, brand, mod_id = -1, steam_owner_id = -1)
 
       if not requested_skinnable_ids.is_a? Array then
         raise "requested_skinnable_ids is not an Array!"
