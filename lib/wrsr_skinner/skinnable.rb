@@ -24,13 +24,21 @@ module WRSRSkinner
       @skin_dir = output_dir_base + '/' + self.skinnable_wrsr_path
     end
 
-    def family
+    def vehicle_family
       return skinnable_entry['family'] unless skinnable_entry['family'].nil?
       path_parts = skinnable_wrsr_path.split('_')
       return self.skinnable_wrsr_path if path_parts.length < 3
       return 'kmz_5320_5410' if path_parts[1] == 'kmz' and ['5320', '5410'].include? path_parts[2]
       ret = self.skinnable_wrsr_path.split('_')[1,2].join('_')
       ret.gsub(/706(rt(tn)?)?\Z/, "706rt")
+    end
+
+    ValidVehicleTypes = ['bus', 'cement', 'covered', 'gravel', 'oil', 'open', 'refrig', 'snow']
+
+    def vehicle_type
+      path_parts = skinnable_wrsr_path.split('_')
+      return path_parts[0] if ValidVehicleTypes.include? path_parts[0]
+      return 'unknown'
     end
 
     def depends_on
