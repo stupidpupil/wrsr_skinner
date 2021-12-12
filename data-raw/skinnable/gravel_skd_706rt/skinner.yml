@@ -1,0 +1,9 @@
+textures:
+  dumper.dds:
+    path: '../open_skd_706rt/dumper.dds'
+    modulate_regions:
+      0,0, 1024,1024:
+        saturation: 0
+    color_regions:
+      0,0, 1024,1024:
+        layer: wooden_hull_base
