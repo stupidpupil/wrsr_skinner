@@ -70,7 +70,7 @@ module WRSRSkinner
           skinnables.each {|s| s.save_textures_with_brand(@brand)}
         end
 
-        File.open(temp_dir + "/workshopconfig", "w") { |f| f.puts self.workshopconfig_as_s }
+        File.open(temp_dir + "/workshopconfig.ini", "w") { |f| f.puts self.workshopconfig_as_s }
 
         files_to_be_zipped = Dir[ File.join( temp_dir, "**", "**" ) ]
 
