@@ -11,6 +11,9 @@ textures:
         saturation: 0
         brightness: 2.8
 
+      C89,789, 130,786:
+        saturation: 0
+
     color_regions:
       0,0, 1024,1024:
         mask: diffuse_mask.png

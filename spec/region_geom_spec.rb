@@ -30,9 +30,32 @@ describe WRSRSkinner::RegionGeom do
 
   describe "when I have a RegionGeom string of '1,2,1+2,system('beep')'" do
 
-    it 'must return a RegionGeomRect' do
+    it 'must raise an Exception' do
       lambda { rg = WRSRSkinner::RegionGeom.region_geom_from_string('1,2,1+2,system(\'beep\')') }.
         should.raise Exception
+    end
+
+  end
+
+  describe "when I have a RegionGeom string of 'U1,2,3,4'" do
+
+    it 'must raise an Exception' do
+      lambda { rg = WRSRSkinner::RegionGeom.region_geom_from_string('U1,2,3,4') }.
+        should.raise Exception
+    end
+
+  end
+
+  describe "when I have a RegionGeom string of 'C1,2,3,4'" do
+
+    rg = WRSRSkinner::RegionGeom.region_geom_from_string('C1,2,3,4')
+
+    it 'must return a RegionGeomCircle' do
+      rg.class.should.eql WRSRSkinner::RegionGeom::RegionGeomCircle
+    end
+
+    it 'must produce a points hash of {"cx"=>1, "cy"=>2, "px"=>3, "py"=>4}' do
+      rg.points_hash.should.eql ({"cx"=>1, "cy"=>2, "px"=>3, "py"=>4})
     end
 
   end

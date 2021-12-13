@@ -4,12 +4,17 @@ module WRSRSkinner
 
     LengthExpRegexp = /\s*\d+(\s*[\+\/\-\*][\(\)]?\s*\d+[\(\)]?)*\s*/
     RectRegexp = /\A(?<x1>#{LengthExpRegexp}),(?<y1>#{LengthExpRegexp}),(?<x2>#{LengthExpRegexp}),(?<y2>#{LengthExpRegexp})\Z/
+    CircleRegexp = /\AC(?<cx>#{LengthExpRegexp}),(?<cy>#{LengthExpRegexp}),(?<px>#{LengthExpRegexp}),(?<py>#{LengthExpRegexp})\Z/
     PolyRegexp = /\A((#{LengthExpRegexp}),)+#{LengthExpRegexp}\Z/
 
     def self.region_geom_from_string(in_str)
 
       if m = in_str.match(RectRegexp)
         return RegionGeomRect.new(m)
+      end
+
+      if m = in_str.match(CircleRegexp)
+        return RegionGeomCircle.new(m)
       end
 
       if in_str.match(PolyRegexp)
@@ -64,6 +69,19 @@ module WRSRSkinner
         [y1,y2].min + height/2
       end
 
+    end
+
+    class RegionGeomCircle
+
+      attr_reader:points_hash
+
+      def initialize(match_data)
+        @points_hash = match_data.named_captures.map { |k,v| [k, eval(v).to_i] }.to_h
+      end
+
+      def draw(magick_draw)
+        magick_draw.circle(*[points_hash['cx'], points_hash['cy'], points_hash['px'], points_hash['py']])
+      end
     end
 
     class RegionGeomPolygon
