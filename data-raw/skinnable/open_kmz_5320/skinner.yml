@@ -23,6 +23,10 @@ textures:
         layer: cab_stripe_base
         mask: base_mask.png
 
+      C942,629, 913,605:
+        layer: hub_caps
+        
+
     logo_regions:
       70,113+5, 70+70,113+70-5:
         layer: cab_stripe_logo

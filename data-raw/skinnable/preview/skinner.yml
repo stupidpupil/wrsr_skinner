@@ -29,6 +29,38 @@ textures:
         layer: cab_stripe_base
         mask: ifa_w_50_mask.png
 
+      C241,480, 279,479:
+        layer: hub_caps
+
+      C636,481, 674,482:
+        layer: hub_caps
+
+      1084,516, 1090,536:
+        layer: hub_caps
+
+      1110,516, 1116,534:
+        layer: hub_caps
+
+      1122,516, 1127,533:
+        layer: hub_caps
+
+      1148,516, 1154,535:
+        layer: hub_caps
+
+      1290,516, 1296,535:
+        layer: hub_caps
+
+      1317,516, 1323,535:
+        layer: hub_caps
+
+      1328,516, 1333,535:
+        layer: hub_caps
+
+      1355,516, 1361,535:
+        layer: hub_caps
+
+
+
     logo_regions:
       325,180, 900,320:
       195,330, 275,380:

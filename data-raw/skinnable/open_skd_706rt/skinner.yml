@@ -24,6 +24,12 @@ textures:
         saturation: 0
         brightness: 0.8
 
+      C519,476, 543,510:
+        saturation: 0
+
+      C715,482, 752,475:
+        saturation: 0
+
     color_regions:
       0,0 ,432,851:
         mask: chasis_mask.png
@@ -54,6 +60,13 @@ textures:
         mask: chasis_mask.png
         comment: cab stripe
         layer: cab_stripe_base
+
+      C519,476, 543,510:
+        layer: hub_caps
+
+      C715,482, 752,475:
+        layer: hub_caps
+
 
     logo_regions:
       40,700, 20+90,700+64:

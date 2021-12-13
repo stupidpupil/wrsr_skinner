@@ -23,6 +23,9 @@ textures:
         mask: diffuse_stripe_mask.png
         layer: cab_stripe_base
 
+      C89,789, 130,786:
+        layer: hub_caps
+
     logo_regions:
       864,848, 864+144,848+106:
         layer: cab_stripe_logo

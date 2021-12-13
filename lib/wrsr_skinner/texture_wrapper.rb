@@ -9,7 +9,8 @@ module WRSRSkinner
       'wooden_hull_base',
       'cab_base',
       'cab_stripe_base',
-      'cab_stripe_logo'
+      'cab_stripe_logo',
+      'hub_caps'
     ]
 
     include Magick
