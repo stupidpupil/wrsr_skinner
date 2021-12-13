@@ -8,11 +8,11 @@ textures:
 
       0,493, 884,493+531:
         saturation: 0
-        brightness: 1.7
+        brightness: 2.3
 
       0,494, 0,355, 136,338, 268,351, 136+269,338, 536,355, 536,494:
         saturation: 0
-        brightness: 1.7
+        brightness: 2.3
 
     color_regions:
       0,493, 884,493+531:

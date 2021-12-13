@@ -6,13 +6,10 @@ textures:
         brightness: 0.65
         mask: base_mask.png
 
-
-
       0,1817, 618,1786, 937,1816, 1234,1883, 1318,1973, 1441,1973, 1441,2048, 0,2048:
         saturation: 0
-        brightness: 1.05
+        brightness: 1.00
         mask: base_mask.png
-
 
     color_regions:
       0,1530 ,1446,1753+2048:
@@ -46,6 +43,15 @@ textures:
 
 
   covered.dds:
+    modulate_regions:
+      0,142, 306,512:
+        saturation: 0
+        brightness: 0.75
+
+      306,201, 417,201, 428,282, 417,360, 428,434, 417,512, 306,512:   
+        saturation: 0
+        brightness: 0.75
+
     color_regions:
       0,142, 306,512:
       306,201, 417,201, 428,282, 417,360, 428,434, 417,512, 306,512:
