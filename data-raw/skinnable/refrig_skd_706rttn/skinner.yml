@@ -31,3 +31,4 @@ textures:
         rotate: 180
 
       196,842, 683,962:
+        flip_x: true
