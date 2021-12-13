@@ -1,0 +1,25 @@
+textures:
+  diffuse.dds:
+    modulate_regions:
+      0,0, 1024,1024:
+        mask: diffuse_mask.png
+        saturation: 0
+        brightness: 0.42
+
+      0,0, 1024,1023:
+        mask: diffuse_stripe_mask.png
+        saturation: 0
+        brightness: 2.8
+
+    color_regions:
+      0,0, 1024,1024:
+        mask: diffuse_mask.png
+        layer: cab_base
+
+      0,0, 1024,1023:
+        mask: diffuse_stripe_mask.png
+        layer: cab_stripe_base
+
+    logo_regions:
+      864,848, 864+144,848+106:
+        layer: cab_stripe_logo
