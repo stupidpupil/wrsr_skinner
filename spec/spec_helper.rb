@@ -5,12 +5,20 @@ require 'wrsr_skinner'
 def same_image_as(path_to_image)
 
   lambda {|obj|
-      # This is a bit of a hack
-      obj = Magick::Image.from_blob(obj.to_blob {|b| b.format = 'png'; b.depth = 8}).first
-
       other_image = Magick::Image.read(path_to_image).first
+
+      other_image.to_blob() { |img| img.format = 'png'}
+
+      obj.to_blob() { |img|
+          img.format = 'DDS'
+          img.define("dds", "compression", "dxt5")
+          img.define("dds", "mipmaps", 1)
+        }
+
+      obj.to_blob() { |img| img.format = 'png'}
+
       diff = other_image.difference(obj)
-      diff[0] < 0.0001 and diff[2] < 0.04 and diff[1] < 0.0001
+      diff.all? { |di| di < 0.001 }
    }
 
 end
