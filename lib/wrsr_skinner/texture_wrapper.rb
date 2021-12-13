@@ -336,7 +336,6 @@ module WRSRSkinner
       overlay.composite!(texture, CenterGravity, DstInCompositeOp)
       texture.composite!(overlay, CenterGravity, OverlayCompositeOp)
 
-      texture.quantize(256, YUVColorspace, FloydSteinbergDitherMethod)
       texture.colorspace = RGBColorspace
 
       return(texture)
