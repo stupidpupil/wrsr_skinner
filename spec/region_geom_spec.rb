@@ -52,5 +52,22 @@ describe WRSRSkinner::RegionGeom do
 
   end
 
+  describe "when I process all Skinnables skinner.ymls" do
+
+    it 'must not raise an error' do
+      lambda {
+        WRSRSkinner::Skinnable.all.each do |sk|
+          sk.texture_wrappers.values.each do |tx|
+            tx.modulate_regions
+            tx.color_regions
+            tx.logo_regions
+          end
+        end
+      }.should.not.raise Exception
+    end
+
+
+  end
+
 
 end

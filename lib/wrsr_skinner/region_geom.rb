@@ -2,20 +2,18 @@ module WRSRSkinner
 
   module RegionGeom
 
-    LengthExpRegexpString = /\s*\d+(\s*[\+\\\-\*]\s*\d+)*\s*/
+    LengthExpRegexp = /\s*\d+(\s*[\+\/\-\*][\(\)]?\s*\d+[\(\)]?)*\s*/
+    RectRegexp = /\A(?<x1>#{LengthExpRegexp}),(?<y1>#{LengthExpRegexp}),(?<x2>#{LengthExpRegexp}),(?<y2>#{LengthExpRegexp})\Z/
+    PolyRegexp = /\A((#{LengthExpRegexp}),)+#{LengthExpRegexp}\Z/
 
     def self.region_geom_from_string(in_str)
 
-      rect_regexp = /\A(?<x1>#{LengthExpRegexpString}),(?<y1>#{LengthExpRegexpString}),(?<x2>#{LengthExpRegexpString}),(?<y2>#{LengthExpRegexpString})\Z/
-
-      if m = in_str.match(rect_regexp)
+      if m = in_str.match(RectRegexp)
         return RegionGeomRect.new(m)
       end
 
-      poly_regexp = /\A((#{LengthExpRegexpString}),)+#{LengthExpRegexpString}\Z/
-
-      if in_str.match(poly_regexp)
-        lengths_as_string = in_str.scan(/(#{LengthExpRegexpString})/).map { |l| l.first }
+      if in_str.match(PolyRegexp)
+        lengths_as_string = in_str.scan(/(#{LengthExpRegexp})/).map { |l| l.first }
         return RegionGeomPolygon.new(lengths_as_string)
       end
 
