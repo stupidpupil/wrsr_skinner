@@ -7,9 +7,9 @@ $TEXTURE_MTL 0 diffuse.dds
 $TEXTURE 1 blankspecular.dds
 $TEXTURE 2 blankbump.dds
 
-$DIFFUSECOLOR 1.0 1.0  1.0  1 
+$DIFFUSECOLOR 0.8 0.8  0.8  1 
 $SPECULARCOLOR 1 1 1 1 
-$AMBIENTCOLOR 1.0  1.0  1.0  1 
+$AMBIENTCOLOR 0.8  0.8  0.8  1 
 $SPECULARPOWER 2
 
 
