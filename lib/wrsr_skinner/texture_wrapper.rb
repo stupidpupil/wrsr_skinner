@@ -35,7 +35,8 @@ module WRSRSkinner
       end
 
       self.texture_entry['modulate_regions'].map {|k,v| {
-        geometry: k, 
+        geometry_str: k,
+        geometry: RegionGeom.region_geom_from_string(k), 
         brightness: (v&.[]('brightness') || 1.0),
         saturation: (v&.[]('saturation') || 1.0),
         hue: (v&.[]('hue') || 1.0),
@@ -56,12 +57,14 @@ module WRSRSkinner
       }
 
       if self.texture_entry['color_regions'].is_a? Array then
-        return self.texture_entry['color_regions'].map {|cr| color_region_default.merge(geometry: cr)}
+        return self.texture_entry['color_regions'].
+          map {|cr| color_region_default.merge(geometry_str: cr, geometry: RegionGeom.region_geom_from_string(cr))}
       end
 
       self.texture_entry['color_regions'].map {|k,v| 
         color_region_default.merge({
-          geometry: k, 
+          geometry_str: k,
+          geometry: RegionGeom.region_geom_from_string(k), 
           layer: v&.[]('layer'),
           mask: v&.[]('mask')
         }.compact)
@@ -84,12 +87,14 @@ module WRSRSkinner
       }
 
       if self.texture_entry['logo_regions'].is_a? Array then
-        return self.texture_entry['logo_regions'].map {|lr| logo_region_default.merge(geometry: lr)}
+        return self.texture_entry['logo_regions'].
+          map {|lr| logo_region_default.merge(geometry_str: lr, geometry: RegionGeom.region_geom_from_string(lr))}
       end
 
       self.texture_entry['logo_regions'].map {|k,v| 
         logo_region_default.merge({
-          geometry: k, 
+          geometry_str: k, 
+          geometry: RegionGeom.region_geom_from_string(k),
           rotate: v&.[]('rotate'),
           worn: v&.[]('worn'),
           barrier: v&.[]('barrier'),
@@ -103,7 +108,7 @@ module WRSRSkinner
     end
 
     def modulated_texture_cache_key
-      Digest::SHA1.hexdigest(self.texture_path + self.modulate_regions.to_s)
+      Digest::SHA1.hexdigest(self.texture_path + self.modulate_regions.filter { |k| k != 'geometry' }.to_s)
     end
 
     def cache_file_ext
@@ -156,15 +161,9 @@ module WRSRSkinner
           mod_texture.composite!(supplied_mask, CenterGravity, DstOutCompositeOp)
         end
 
-        drs_points = drs[:geometry].split(",").map {|e| eval(e).to_i}
-
         region = Magick::Draw.new
         
-        if(drs_points.count == 4)
-          region.rectangle(*drs_points)
-        else
-          region.polygon(*drs_points)
-        end
+        drs[:geometry].draw(region)
 
         region.fill = 'white'
         region.draw(mod_mask)
@@ -213,17 +212,12 @@ module WRSRSkinner
         end
 
         crs_for_color.each do |crs|
-          crs_points = crs[:geometry].split(",").map {|e| eval(e).to_i}
 
           region = Magick::Draw.new
           
           region.fill = region_color
 
-          if(crs_points.count == 4)
-            region.rectangle(*crs_points)
-          else
-            region.polygon(*crs_points)
-          end
+          crs[:geometry].draw(region)
 
           region.draw(color_overlay)
 
@@ -248,15 +242,7 @@ module WRSRSkinner
 
           logo_regions_with_brand.each do |lr|
             next if not lr[:barrier]
-            
-            region_points = lr[:geometry].split(",").map {|e| eval(e).to_i}
-
-            lr_width = region_points[2] - region_points[0]
-            lr_height = region_points[3] - region_points[1]
-
-            lr_centre_x = region_points[0] + (lr_width/2).to_i
-            lr_centre_y = region_points[1] + (lr_height/2).to_i
-
+        
             # TODO Fix the inefficiency of actually doing this twice
             lg = brand.logo.logo_mask.copy
 
@@ -264,13 +250,13 @@ module WRSRSkinner
               lg.resize!(lg.columns*lr[:squish], lg.rows)
             end
 
-            lg = lg.rotate(lr[:rotate]).resize_to_fit(lr_width, lr_height) 
+            lg = lg.rotate(lr[:rotate]).resize_to_fit(lr[:geometry].width, lr[:geometry].height) 
 
             region = Magick::Draw.new
             
             region.fill = 'white'
 
-            region.circle(lr_centre_x,lr_centre_y, lr_centre_x+lg.columns/2, lr_centre_y+lg.rows/2)
+            region.circle(lr[:geometry].cx, lr[:geometry].cy, lr[:geometry].cx+lg.columns/2, lr[:geometry].cy+lg.rows/2)
 
             region.draw(barrier_overlay)
 
@@ -307,20 +293,11 @@ module WRSRSkinner
 
         # Resize logo
 
-        region_points = lr[:geometry].split(",").map {|e| eval(e).to_i}
-
-        lr_width = region_points[2] - region_points[0]
-        lr_height = region_points[3] - region_points[1]
-
-        lg.rotate!(lr[:rotate]).resize_to_fit!(lr_width, lr_height)
-
-        # Find centre of logo region
-        lr_centre_x = region_points[0] + (lr_width/2).to_i
-        lr_centre_y = region_points[1] + (lr_height/2).to_i
+        lg.rotate!(lr[:rotate]).resize_to_fit!(lr[:geometry].width, lr[:geometry].height)
 
         # Adjust for CenterGravity
-        lr_centre_x = lr_centre_x - (overlay.columns/2).to_i
-        lr_centre_y = lr_centre_y - (overlay.rows/2).to_i
+        lr_centre_x = lr[:geometry].cx - (overlay.columns/2).to_i
+        lr_centre_y = lr[:geometry].cy - (overlay.rows/2).to_i
 
         overlay.composite!(lg, CenterGravity, lr_centre_x, lr_centre_y, OverCompositeOp)
       end
