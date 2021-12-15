@@ -23,12 +23,20 @@ module WRSRSkinner
 
     def initialize(requested_skinnable_ids, brand, mod_id = -1, steam_owner_id = -1)
 
-      if not requested_skinnable_ids.is_a? Array then
-        raise "requested_skinnable_ids is not an Array!"
+      requested_skinnable_ids.compact!
+
+      if not [:map, :count, :filter].all? { |m| requested_skinnable_ids.respond_to?(m) } then
+        raise "requested_skinnable_ids is not Enumerable or similar!"
+      end
+
+      requested_skinnable_ids = requested_skinnable_ids.filter { |e| Skinnable.valid_skinnable_paths.include?(e) }
+
+      if requested_skinnable_ids.count < 1 then
+        raise "requested_skinnable_ids must have at least 1 valid skinnable path!"
       end
 
       if requested_skinnable_ids.count > 16 then
-        raise "requested_skinnable_ids has more than 16 members!"
+        raise "requested_skinnable_ids has more than 16 valid skinnable paths!"
       end
 
       @requested_skinnable_ids = requested_skinnable_ids

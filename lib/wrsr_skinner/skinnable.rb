@@ -5,8 +5,12 @@ module WRSRSkinner
     BaseDir = __dir__ + "/../../data-raw/skinnable/"
     DefaultOutputDirBase = __dir__ + "/../../output/"
 
+    def self.valid_skinnable_paths
+      Dir.glob("*", base:BaseDir)
+    end
+
     def self.all(output_dir_base = DefaultOutputDirBase)
-      Dir.glob("*", base:BaseDir).map{|wrsr_path| Skinnable.new(wrsr_path, output_dir_base)}
+      Skinnable.valid_skinnable_paths.map{|wrsr_path| Skinnable.new(wrsr_path, output_dir_base)}
     end
 
     attr_reader :skinnable_wrsr_path, :skinnable_dir, :skinnable_entry, :skin_dir
