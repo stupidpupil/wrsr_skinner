@@ -90,6 +90,7 @@ module WRSRSkinner
 
       def initialize(lengths_as_string)
         @lengths = lengths_as_string.map { |l| eval(l).to_i }
+        raise "RegionGeomPolygon must have pairs of lengths!" if @lengths.count % 2 != 0
       end
 
       def draw(magick_draw)

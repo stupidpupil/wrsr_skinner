@@ -75,6 +75,15 @@ describe WRSRSkinner::RegionGeom do
 
   end
 
+  describe "when I have a RegionGeom string of '1,2, 3,4, 5'" do
+
+    it 'must raise an Exception' do
+      lambda { rg = WRSRSkinner::RegionGeom.region_geom_from_string('1,2, 3,4, 5') }.
+        should.raise Exception
+    end
+
+  end
+
   describe "when I process all Skinnables skinner.ymls" do
 
     it 'must not raise an error' do
