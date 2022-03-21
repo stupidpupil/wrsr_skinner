@@ -1,0 +1,72 @@
+textures:
+  diffuse.dds:
+    modulate_regions:
+      0,0, 1024,1024:
+        saturation: 0
+        brightness: 2.8
+        mask: 'diffuse_main.png'
+
+      0,343, 720,359:
+        saturation: 0
+        brightness: 0.15
+
+      0,472, 610,489:
+        saturation: 0
+        brightness: 0.15
+
+      807,74, 988,91:
+        saturation: 0
+        brightness: 0.15
+
+      804,518, 986,534:
+        saturation: 0
+        brightness: 0.15
+      
+      20,836, 63,852:
+        saturation: 0
+        brightness: 0.15        
+        mask: 'diffuse_main.png'
+
+      174,836, 528,852:
+        saturation: 0
+        brightness: 0.15        
+        mask: 'diffuse_main.png'
+
+      639,836, 686,852:
+        saturation: 0
+        brightness: 0.15        
+        mask: 'diffuse_main.png'
+
+    color_regions:
+      0,0, 1024,1024:
+        mask: 'diffuse_main.png'
+        layer: base
+
+      0,343, 720,359:
+        layer: stripe
+
+      0,472, 610,489:
+        layer: stripe
+
+      807,74, 988,91:
+        layer: stripe
+
+      804,518, 986,534:
+        layer: stripe
+
+      20,836, 63,852:
+        layer: stripe
+        mask: 'diffuse_main.png'
+
+      174,836, 528,852:
+        layer: stripe   
+        mask: 'diffuse_main.png'
+
+      639,836, 686,852:
+        layer: stripe       
+        mask: 'diffuse_main.png'
+
+    logo_regions:
+      84,398, 84+81,398+92:
+
+      438,398, 438+81,398+92:

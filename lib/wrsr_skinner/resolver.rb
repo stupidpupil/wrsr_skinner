@@ -8,7 +8,9 @@ module WRSRSkinner
       DEFAULT_PATHS = [
         __dir__ + "/../../data-raw/skinnable/",
         '/Program Files (x86)/Steam/steamapps/common/SovietRepublic/media_soviet/vehicles/',
-        '/mnt/c/Program Files (x86)/Steam/steamapps/common/SovietRepublic/media_soviet/vehicles/'
+        '/mnt/c/Program Files (x86)/Steam/steamapps/common/SovietRepublic/media_soviet/vehicles/',
+        '/Program Files (x86)/Steam/steamapps/common/SovietRepublic/media_soviet/trains/',
+        '/mnt/c/Program Files (x86)/Steam/steamapps/common/SovietRepublic/media_soviet/trains/'
       ]
 
       def initialize
